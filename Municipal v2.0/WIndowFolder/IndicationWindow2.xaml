@@ -1,0 +1,144 @@
+﻿<mah:MetroWindow x:Class="Municipal_v2._0.WIndowFolder.IndicationWindow2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:Municipal_v2._0.WIndowFolder"
+        mc:Ignorable="d"
+        Title="Показания ОДПУ" Height="949.5" Width="1598">
+    <Grid >
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="1017"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7"/>
+            <ColumnDefinition Width="795"/>
+            <ColumnDefinition Width="795"/>
+            <ColumnDefinition Width="0"/>
+        </Grid.ColumnDefinitions>
+
+
+
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,27" >
+            <Border Background="#FF767676" Grid.Column="0" Margin="43,-570,43,343" Height="35" BorderBrush="Black" BorderThickness="1">
+                <TextBlock Text="Общие показания ИПУ" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,0" FontFamily="Agency FB" FontWeight="Bold"/>
+            </Border>
+
+            <Grid>
+                <Line X1="30"  Margin="13,40,0,0"  Stroke="Black"/>
+                <Line X1="30"  Margin="759,40,0,0"  Stroke="Black"/>
+                <Line Y1="850" Margin="13,40,0,0"  Stroke="Black"/>
+                <Line Y1="850" Margin="789,40,0,0"  Stroke="Black"/>
+                <Line X1="0" X2="776" Y1="100" Y2="100" Margin="13,790,0,0" Stroke="Black"/>
+            </Grid>
+            <Grid Margin="17,88,17,113">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="42"/>
+                    <RowDefinition Height="500"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="addPublicButton" Margin="5,7,0,7" Width="100" Content="Добавить" Click="addPublicButton_Click"/>
+                        <Button  Margin="5,7,0,7" Width="100" Content="Удалить"  x:Name="deletePublicButon" Click="deletePublicButon_Click"/>
+                    </StackPanel>
+                </Grid>
+
+                <DataGrid Grid.Row="1" x:Name="individualDataGrid" ItemsSource="{Binding Individual_Amounts}" SelectedItem="{Binding selectedIndividualAmount}" IsReadOnly="True" AutoGenerateColumns="False" Margin="0,0,0,-251" >
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Адрес">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <TextBlock Text="г. "/>
+                                        <TextBlock Text="{Binding House.city}"/>
+                                        <TextBlock Text=" ул. "/>
+                                        <TextBlock  Text="{Binding House.street}"/>
+                                        <TextBlock Text=" д. "/>
+                                        <TextBlock  Text="{Binding House.house1}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                       
+                        <DataGridTextColumn Header="Услуга" x:Name="serviceDataGrudColumn" Binding="{Binding HouseService.Service.name_service}"/>
+                        <DataGridTemplateColumn Header="Показания">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <TextBlock Text="{Binding used}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn Header="Дата" Binding="{Binding date}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+
+            </Grid>
+        </Grid>
+
+
+
+        <Grid Grid.Row="1" Grid.Column="2" Margin="0,0,0,27">
+            <Border Background="#FF767676" Grid.Column="0" Margin="43,-290,56,616" Height="35" BorderBrush="Black" BorderThickness="1">
+                <TextBlock Text="Показания общедомовых счетчиков" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,0" FontFamily="Agency FB" FontWeight="Bold"/>
+            </Border>
+
+            <Grid>
+                <Line X1="30"  Margin="13,40,0,0"  Stroke="Black"/>
+                <Line X1="30"  Margin="739,40,0,0"  Stroke="Black"/>
+                <Line Y1="850" Margin="13,40,0,0"  Stroke="Black"/>
+                <Line Y1="850" Margin="769,40,0,0"  Stroke="Black"/>
+                <Line X1="0" X2="756" Y1="100" Y2="100" Margin="13,790,0,0" Stroke="Black"/>
+            </Grid>
+            <Grid Margin="17,88,31,17">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="42"/>
+                    <RowDefinition Height="746"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Grid >
+                    <StackPanel Orientation="Horizontal">
+                        <Button Margin="5,7,0,7" Width="100" Content="Добавить" x:Name="addHousePublic" Click="addHousePublic_Click"/>
+                        <Button  Margin="5,7,0,7" Width="100" Content="Удалить"  x:Name="deleteHousePublic" Click="deleteHousePublic_Click"/>
+
+                    </StackPanel>
+                </Grid>
+
+                <DataGrid IsReadOnly="True"  AutoGenerateColumns="False" x:Name="generalDataGrid" Grid.Row="1" SelectedItem="{Binding selectedHousePublic}" >
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Адрес">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <TextBlock Text="г. "/>
+                                        <TextBlock Text="{Binding HouseService.House.city}"/>
+                                        <TextBlock Text=" ул. "/>
+                                        <TextBlock  Text="{Binding HouseService.House.street}"/>
+                                        <TextBlock Text=" д. "/>
+                                        <TextBlock  Text="{Binding HouseService.House.house1}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+
+
+                        <DataGridTextColumn Header="Услуга" Binding="{Binding HouseService.Service.name_service}"/>
+                        <DataGridTextColumn Header="Использовано" Binding="{Binding used}"/>
+                        <DataGridTextColumn Header="Дата" Binding="{Binding date}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</mah:MetroWindow>

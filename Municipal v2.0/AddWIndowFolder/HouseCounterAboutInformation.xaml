@@ -1,0 +1,72 @@
+﻿<mah:MetroWindow x:Class="Municipal_v2._0.AddWIndowFolder.HouseCounterAboutInformation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:Municipal_v2._0.AddWIndowFolder"
+        mc:Ignorable="d"
+        Title="Виды счетчиков" Height="590.917" Width="769.649" ResizeMode="NoResize"> 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="26"/>
+            <RowDefinition Height="524"/>
+            <RowDefinition Height="9"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4"/>
+            <ColumnDefinition Width="741"/>
+            <ColumnDefinition Width="0"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TextBlock Text="г. "/>
+                <TextBlock Text="{Binding city}"/>
+                <TextBlock Text=" ул. "/>
+                <TextBlock Text="{Binding street}"/>
+                <TextBlock Text=" д. "/>
+                <TextBlock Text="{Binding house1}"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Border Background="#FF767676"  Height="35" BorderBrush="Black" BorderThickness="1" Margin="50,-240,43,223">
+                <TextBlock Text="Общедомовые счетчики" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,0" FontFamily="Agency FB" FontWeight="Bold"/>
+            </Border>
+
+            <Grid>
+                <Line X1="40"  Margin="10,30,0,0"  Stroke="Black"/>
+                <Line X1="40"  Margin="699,30,0,0"  Stroke="Black"/>
+                <Line Y1="490"  Margin="10,30,0,0"  Stroke="Black"/>
+                <Line Y1="490"  Margin="739,30,0,0"  Stroke="Black"/>
+                <Line X1="0" X2="730" Y1="100" Y2="100" Margin="10,420,0,0" Stroke="Black"/>
+            </Grid>
+
+            <Grid Margin="15,56,18,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="420"/>
+                   
+                </Grid.RowDefinitions>
+
+
+                <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,2">
+                    <Button Width="100" Content="Удалить" Margin="5,0,0,0" x:Name="deleteHouseServiCeButton" Click="deleteHouseServiCeButton_Click" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="1">
+                    <DataGrid Height="417" x:Name="houseCounterDataGrid" SelectedItem="{Binding selectedHouseCounter}" AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="№ счетчика" Binding="{Binding house_counter_id}"/>
+                            <DataGridTextColumn Header="Услуга" Binding="{Binding HouseService.Service.name_service}"/>
+                            <DataGridTextColumn Header="Показания" Binding="{Binding indication}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+</mah:MetroWindow>

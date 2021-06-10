@@ -1,0 +1,1801 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище municipalDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Apartment">
+          <Key>
+            <PropertyRef Name="apartment_id" />
+          </Key>
+          <Property Name="apartment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="house_id" Type="int" />
+          <Property Name="flat" Type="int" Nullable="false" />
+          <Property Name="number of residents&#xD;&#xA;number of residents&#xD;&#xA;number of residents&#xD;&#xA;number of residents&#xD;&#xA;number_of_residents]" Type="int" Nullable="false" />
+          <Property Name="square" Type="real" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Benefit">
+          <Key>
+            <PropertyRef Name="benefit_id" />
+          </Key>
+          <Property Name="benefit_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="coefficient" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BenefitService">
+          <Key>
+            <PropertyRef Name="benefit_service_id" />
+          </Key>
+          <Property Name="benefit_service_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="benefit_id" Type="int" Nullable="false" />
+          <Property Name="service_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Counter">
+          <Key>
+            <PropertyRef Name="counter_id" />
+          </Key>
+          <Property Name="counter_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="apartment_id" Type="int" />
+          <Property Name="service_id" Type="int" />
+          <Property Name="indications" Type="float" Nullable="false" />
+          <Property Name="bit" Type="bit" />
+        </EntityType>
+        <EntityType Name="Device">
+          <Key>
+            <PropertyRef Name="metering_device" />
+          </Key>
+          <Property Name="metering_device" Type="int" Nullable="false" />
+          <Property Name="device" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="gender_id" />
+          </Key>
+          <Property Name="gender_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cut_gender" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="name_gender" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="House">
+          <Key>
+            <PropertyRef Name="house_id" />
+          </Key>
+          <Property Name="house_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="region" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="street" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="house" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="square_residental" Type="float" />
+          <Property Name="square_nonresidental" Type="float" />
+        </EntityType>
+        <EntityType Name="House_counter">
+          <Key>
+            <PropertyRef Name="house_counter_id" />
+          </Key>
+          <Property Name="house_counter_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="house_id" Type="int" Nullable="false" />
+          <Property Name="service_id" Type="int" Nullable="false" />
+          <Property Name="indication" Type="float" />
+        </EntityType>
+        <EntityType Name="House_public_utilities">
+          <Key>
+            <PropertyRef Name="house_public_utilities_id" />
+          </Key>
+          <Property Name="house_public_utilities_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="house_service_id" Type="int" />
+          <Property Name="used" Type="real" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="house_counter_id" Type="int" />
+        </EntityType>
+        <EntityType Name="HouseService">
+          <Key>
+            <PropertyRef Name="house_service_id" />
+          </Key>
+          <Property Name="house_service_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="house_id" Type="int" Nullable="false" />
+          <Property Name="service_id" Type="int" />
+          <Property Name="rate" Type="float" />
+          <Property Name="payment_id" Type="int" />
+          <Property Name="norm" Type="float" />
+          <Property Name="device_id" Type="int" />
+          <Property Name="high_coef" Type="float" />
+        </EntityType>
+        <EntityType Name="Individual_amount">
+          <Key>
+            <PropertyRef Name="individual_amount_id" />
+          </Key>
+          <Property Name="individual_amount_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="house_service_id" Type="int" />
+          <Property Name="used" Type="float" />
+          <Property Name="date" Type="date" />
+          <Property Name="house_id" Type="int" />
+        </EntityType>
+        <EntityType Name="info_UK">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uk_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="INN" Type="nvarchar" MaxLength="50" />
+          <Property Name="r/s" Type="nvarchar" MaxLength="50" />
+          <Property Name="name_bank" Type="nvarchar" MaxLength="50" />
+          <Property Name="k/s" Type="nvarchar" MaxLength="50" />
+          <Property Name="BIK" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="adress" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Maintenance_and_repair">
+          <Key>
+            <PropertyRef Name="maintenance_repair_id" />
+          </Key>
+          <Property Name="maintenance_repair_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="personal_id" Type="int" />
+          <Property Name="house_service_id" Type="int" />
+          <Property Name="amount" Type="money" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="benefit" Type="money" />
+          <Property Name="amount_pay" Type="money" />
+        </EntityType>
+        <EntityType Name="Owner">
+          <Key>
+            <PropertyRef Name="owner_id" />
+          </Key>
+          <Property Name="owner_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="middle_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="gender_id" Type="int" Nullable="false" />
+          <Property Name="birthday" Type="date" Nullable="false" />
+          <Property Name="phone_number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="series_passport" Type="int" Nullable="false" />
+          <Property Name="number_passport" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="date_passport" Type="date" Nullable="false" />
+          <Property Name="who_issued_passport" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OwnerBenefit">
+          <Key>
+            <PropertyRef Name="owner_benefit_id" />
+          </Key>
+          <Property Name="owner_benefit_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="owner_id" Type="int" Nullable="false" />
+          <Property Name="benefit_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Personal_account">
+          <Key>
+            <PropertyRef Name="personal_id" />
+          </Key>
+          <Property Name="personal_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="owner_id" Type="int" />
+          <Property Name="apartment_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Public_utilities">
+          <Key>
+            <PropertyRef Name="public_utilities_id" />
+          </Key>
+          <Property Name="public_utilities_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="counter_id" Type="int" />
+          <Property Name="used" Type="real" Nullable="false" />
+          <Property Name="recalculation" Type="money" />
+          <Property Name="amount_pay" Type="money" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="house_service_id" Type="int" />
+          <Property Name="personal_id" Type="int" Nullable="false" />
+          <Property Name="size_high_coef" Type="float" />
+          <Property Name="amount_high_coef" Type="money" />
+          <Property Name="benefit" Type="money" />
+          <Property Name="amount" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Receipt">
+          <Key>
+            <PropertyRef Name="receipt_id" />
+          </Key>
+          <Property Name="receipt_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="personal_id" Type="int" Nullable="false" />
+          <Property Name="amount" Type="money" />
+          <Property Name="debt" Type="money" />
+          <Property Name="amount_to_pay" Type="money" Nullable="false" />
+          <Property Name="penalties" Type="money" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="date_pay" Type="date" />
+          <Property Name="amount_paid" Type="money" />
+          <Property Name="date_pay_before" Type="date" />
+          <Property Name="overpayment" Type="money" />
+          <Property Name="last_payment_date" Type="date" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="service_id" />
+          </Key>
+          <Property Name="service_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_service" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="unit_of_measure" Type="nchar" MaxLength="10" />
+          <Property Name="type_service_id" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Type_payment">
+          <Key>
+            <PropertyRef Name="payment_id" />
+          </Key>
+          <Property Name="payment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="service_id" Type="int" />
+          <Property Name="type_payment" Type="nvarchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Type_service">
+          <Key>
+            <PropertyRef Name="type_service_id" />
+          </Key>
+          <Property Name="type_service_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Apartment_House">
+          <End Role="House" Type="Self.House" Multiplicity="0..1" />
+          <End Role="Apartment" Type="Self.Apartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House">
+              <PropertyRef Name="house_id" />
+            </Principal>
+            <Dependent Role="Apartment">
+              <PropertyRef Name="house_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BenefitService_Benefit">
+          <End Role="Benefit" Type="Self.Benefit" Multiplicity="1" />
+          <End Role="BenefitService" Type="Self.BenefitService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Benefit">
+              <PropertyRef Name="benefit_id" />
+            </Principal>
+            <Dependent Role="BenefitService">
+              <PropertyRef Name="benefit_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BenefitService_Service1">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="BenefitService" Type="Self.BenefitService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="service_id" />
+            </Principal>
+            <Dependent Role="BenefitService">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Counter_Apartment">
+          <End Role="Apartment" Type="Self.Apartment" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Counter" Type="Self.Counter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apartment">
+              <PropertyRef Name="apartment_id" />
+            </Principal>
+            <Dependent Role="Counter">
+              <PropertyRef Name="apartment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Counter_HouseService">
+          <End Role="HouseService" Type="Self.HouseService" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Counter" Type="Self.Counter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HouseService">
+              <PropertyRef Name="house_service_id" />
+            </Principal>
+            <Dependent Role="Counter">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_House_counter_House">
+          <End Role="House" Type="Self.House" Multiplicity="1" />
+          <End Role="House_counter" Type="Self.House_counter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House">
+              <PropertyRef Name="house_id" />
+            </Principal>
+            <Dependent Role="House_counter">
+              <PropertyRef Name="house_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_House_counter_HouseService">
+          <End Role="HouseService" Type="Self.HouseService" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="House_counter" Type="Self.House_counter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HouseService">
+              <PropertyRef Name="house_service_id" />
+            </Principal>
+            <Dependent Role="House_counter">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_House_public_utilities_House_counter">
+          <End Role="House_counter" Type="Self.House_counter" Multiplicity="0..1" />
+          <End Role="House_public_utilities" Type="Self.House_public_utilities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House_counter">
+              <PropertyRef Name="house_counter_id" />
+            </Principal>
+            <Dependent Role="House_public_utilities">
+              <PropertyRef Name="house_counter_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_House_public_utilities_HouseService">
+          <End Role="HouseService" Type="Self.HouseService" Multiplicity="0..1" />
+          <End Role="House_public_utilities" Type="Self.House_public_utilities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HouseService">
+              <PropertyRef Name="house_service_id" />
+            </Principal>
+            <Dependent Role="House_public_utilities">
+              <PropertyRef Name="house_service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HouseService_Device">
+          <End Role="Device" Type="Self.Device" Multiplicity="0..1" />
+          <End Role="HouseService" Type="Self.HouseService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="metering_device" />
+            </Principal>
+            <Dependent Role="HouseService">
+              <PropertyRef Name="device_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HouseService_House">
+          <End Role="House" Type="Self.House" Multiplicity="1" />
+          <End Role="HouseService" Type="Self.HouseService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House">
+              <PropertyRef Name="house_id" />
+            </Principal>
+            <Dependent Role="HouseService">
+              <PropertyRef Name="house_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HouseService_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HouseService" Type="Self.HouseService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="service_id" />
+            </Principal>
+            <Dependent Role="HouseService">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HouseService_Type_payment">
+          <End Role="Type_payment" Type="Self.Type_payment" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HouseService" Type="Self.HouseService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_payment">
+              <PropertyRef Name="payment_id" />
+            </Principal>
+            <Dependent Role="HouseService">
+              <PropertyRef Name="payment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Individual_amount_House">
+          <End Role="House" Type="Self.House" Multiplicity="0..1" />
+          <End Role="Individual_amount" Type="Self.Individual_amount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House">
+              <PropertyRef Name="house_id" />
+            </Principal>
+            <Dependent Role="Individual_amount">
+              <PropertyRef Name="house_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Individual_amount_Individual_amount">
+          <End Role="HouseService" Type="Self.HouseService" Multiplicity="0..1" />
+          <End Role="Individual_amount" Type="Self.Individual_amount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HouseService">
+              <PropertyRef Name="house_service_id" />
+            </Principal>
+            <Dependent Role="Individual_amount">
+              <PropertyRef Name="house_service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Maintenance_and_repair_HouseService">
+          <End Role="HouseService" Type="Self.HouseService" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Maintenance_and_repair" Type="Self.Maintenance_and_repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HouseService">
+              <PropertyRef Name="house_service_id" />
+            </Principal>
+            <Dependent Role="Maintenance_and_repair">
+              <PropertyRef Name="house_service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Maintenance_and_repair_Personal_account">
+          <End Role="Personal_account" Type="Self.Personal_account" Multiplicity="0..1" />
+          <End Role="Maintenance_and_repair" Type="Self.Maintenance_and_repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_account">
+              <PropertyRef Name="personal_id" />
+            </Principal>
+            <Dependent Role="Maintenance_and_repair">
+              <PropertyRef Name="personal_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Owner_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="Owner" Type="Self.Owner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="gender_id" />
+            </Principal>
+            <Dependent Role="Owner">
+              <PropertyRef Name="gender_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OwnerBenefit_Benefit">
+          <End Role="Benefit" Type="Self.Benefit" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OwnerBenefit" Type="Self.OwnerBenefit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Benefit">
+              <PropertyRef Name="benefit_id" />
+            </Principal>
+            <Dependent Role="OwnerBenefit">
+              <PropertyRef Name="benefit_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OwnerBenefit_Owner">
+          <End Role="Owner" Type="Self.Owner" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OwnerBenefit" Type="Self.OwnerBenefit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owner">
+              <PropertyRef Name="owner_id" />
+            </Principal>
+            <Dependent Role="OwnerBenefit">
+              <PropertyRef Name="owner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personal_account_Apartment">
+          <End Role="Apartment" Type="Self.Apartment" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Personal_account" Type="Self.Personal_account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apartment">
+              <PropertyRef Name="apartment_id" />
+            </Principal>
+            <Dependent Role="Personal_account">
+              <PropertyRef Name="apartment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personal_account_Owner">
+          <End Role="Owner" Type="Self.Owner" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Personal_account" Type="Self.Personal_account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owner">
+              <PropertyRef Name="owner_id" />
+            </Principal>
+            <Dependent Role="Personal_account">
+              <PropertyRef Name="owner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Public_utilities_Counter">
+          <End Role="Counter" Type="Self.Counter" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Public_utilities" Type="Self.Public_utilities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Counter">
+              <PropertyRef Name="counter_id" />
+            </Principal>
+            <Dependent Role="Public_utilities">
+              <PropertyRef Name="counter_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Public_utilities_HouseService">
+          <End Role="HouseService" Type="Self.HouseService" Multiplicity="0..1" />
+          <End Role="Public_utilities" Type="Self.Public_utilities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HouseService">
+              <PropertyRef Name="house_service_id" />
+            </Principal>
+            <Dependent Role="Public_utilities">
+              <PropertyRef Name="house_service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Public_utilities_Personal_account">
+          <End Role="Personal_account" Type="Self.Personal_account" Multiplicity="1" />
+          <End Role="Public_utilities" Type="Self.Public_utilities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_account">
+              <PropertyRef Name="personal_id" />
+            </Principal>
+            <Dependent Role="Public_utilities">
+              <PropertyRef Name="personal_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipt_Personal_account">
+          <End Role="Personal_account" Type="Self.Personal_account" Multiplicity="1" />
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_account">
+              <PropertyRef Name="personal_id" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="personal_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Type_service">
+          <End Role="Type_service" Type="Self.Type_service" Multiplicity="0..1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_service">
+              <PropertyRef Name="type_service_id" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="type_service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Type_payment_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
+          <End Role="Type_payment" Type="Self.Type_payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="service_id" />
+            </Principal>
+            <Dependent Role="Type_payment">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище municipalDBModelContainer">
+          <EntitySet Name="Apartment" EntityType="Self.Apartment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Benefit" EntityType="Self.Benefit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BenefitService" EntityType="Self.BenefitService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Counter" EntityType="Self.Counter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Device" EntityType="Self.Device" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="House" EntityType="Self.House" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="House_counter" EntityType="Self.House_counter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="House_public_utilities" EntityType="Self.House_public_utilities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HouseService" EntityType="Self.HouseService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Individual_amount" EntityType="Self.Individual_amount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="info_UK" EntityType="Self.info_UK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Maintenance_and_repair" EntityType="Self.Maintenance_and_repair" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Owner" EntityType="Self.Owner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OwnerBenefit" EntityType="Self.OwnerBenefit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personal_account" EntityType="Self.Personal_account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Public_utilities" EntityType="Self.Public_utilities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Receipt" EntityType="Self.Receipt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_payment" EntityType="Self.Type_payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_service" EntityType="Self.Type_service" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Apartment_House" Association="Self.FK_Apartment_House">
+            <End Role="House" EntitySet="House" />
+            <End Role="Apartment" EntitySet="Apartment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BenefitService_Benefit" Association="Self.FK_BenefitService_Benefit">
+            <End Role="Benefit" EntitySet="Benefit" />
+            <End Role="BenefitService" EntitySet="BenefitService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BenefitService_Service1" Association="Self.FK_BenefitService_Service1">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="BenefitService" EntitySet="BenefitService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Counter_Apartment" Association="Self.FK_Counter_Apartment">
+            <End Role="Apartment" EntitySet="Apartment" />
+            <End Role="Counter" EntitySet="Counter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Counter_HouseService" Association="Self.FK_Counter_HouseService">
+            <End Role="HouseService" EntitySet="HouseService" />
+            <End Role="Counter" EntitySet="Counter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_House_counter_House" Association="Self.FK_House_counter_House">
+            <End Role="House" EntitySet="House" />
+            <End Role="House_counter" EntitySet="House_counter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_House_counter_HouseService" Association="Self.FK_House_counter_HouseService">
+            <End Role="HouseService" EntitySet="HouseService" />
+            <End Role="House_counter" EntitySet="House_counter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_House_public_utilities_House_counter" Association="Self.FK_House_public_utilities_House_counter">
+            <End Role="House_counter" EntitySet="House_counter" />
+            <End Role="House_public_utilities" EntitySet="House_public_utilities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_House_public_utilities_HouseService" Association="Self.FK_House_public_utilities_HouseService">
+            <End Role="HouseService" EntitySet="HouseService" />
+            <End Role="House_public_utilities" EntitySet="House_public_utilities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HouseService_Device" Association="Self.FK_HouseService_Device">
+            <End Role="Device" EntitySet="Device" />
+            <End Role="HouseService" EntitySet="HouseService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HouseService_House" Association="Self.FK_HouseService_House">
+            <End Role="House" EntitySet="House" />
+            <End Role="HouseService" EntitySet="HouseService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HouseService_Service" Association="Self.FK_HouseService_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="HouseService" EntitySet="HouseService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HouseService_Type_payment" Association="Self.FK_HouseService_Type_payment">
+            <End Role="Type_payment" EntitySet="Type_payment" />
+            <End Role="HouseService" EntitySet="HouseService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Individual_amount_House" Association="Self.FK_Individual_amount_House">
+            <End Role="House" EntitySet="House" />
+            <End Role="Individual_amount" EntitySet="Individual_amount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Individual_amount_Individual_amount" Association="Self.FK_Individual_amount_Individual_amount">
+            <End Role="HouseService" EntitySet="HouseService" />
+            <End Role="Individual_amount" EntitySet="Individual_amount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Maintenance_and_repair_HouseService" Association="Self.FK_Maintenance_and_repair_HouseService">
+            <End Role="HouseService" EntitySet="HouseService" />
+            <End Role="Maintenance_and_repair" EntitySet="Maintenance_and_repair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Maintenance_and_repair_Personal_account" Association="Self.FK_Maintenance_and_repair_Personal_account">
+            <End Role="Personal_account" EntitySet="Personal_account" />
+            <End Role="Maintenance_and_repair" EntitySet="Maintenance_and_repair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Owner_Gender" Association="Self.FK_Owner_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Owner" EntitySet="Owner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OwnerBenefit_Benefit" Association="Self.FK_OwnerBenefit_Benefit">
+            <End Role="Benefit" EntitySet="Benefit" />
+            <End Role="OwnerBenefit" EntitySet="OwnerBenefit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OwnerBenefit_Owner" Association="Self.FK_OwnerBenefit_Owner">
+            <End Role="Owner" EntitySet="Owner" />
+            <End Role="OwnerBenefit" EntitySet="OwnerBenefit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personal_account_Apartment" Association="Self.FK_Personal_account_Apartment">
+            <End Role="Apartment" EntitySet="Apartment" />
+            <End Role="Personal_account" EntitySet="Personal_account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personal_account_Owner" Association="Self.FK_Personal_account_Owner">
+            <End Role="Owner" EntitySet="Owner" />
+            <End Role="Personal_account" EntitySet="Personal_account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Public_utilities_Counter" Association="Self.FK_Public_utilities_Counter">
+            <End Role="Counter" EntitySet="Counter" />
+            <End Role="Public_utilities" EntitySet="Public_utilities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Public_utilities_HouseService" Association="Self.FK_Public_utilities_HouseService">
+            <End Role="HouseService" EntitySet="HouseService" />
+            <End Role="Public_utilities" EntitySet="Public_utilities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Public_utilities_Personal_account" Association="Self.FK_Public_utilities_Personal_account">
+            <End Role="Personal_account" EntitySet="Personal_account" />
+            <End Role="Public_utilities" EntitySet="Public_utilities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipt_Personal_account" Association="Self.FK_Receipt_Personal_account">
+            <End Role="Personal_account" EntitySet="Personal_account" />
+            <End Role="Receipt" EntitySet="Receipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Type_service" Association="Self.FK_Service_Type_service">
+            <End Role="Type_service" EntitySet="Type_service" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Type_payment_Service" Association="Self.FK_Type_payment_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="Type_payment" EntitySet="Type_payment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="municipalDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Apartment">
+          <Key>
+            <PropertyRef Name="apartment_id" />
+          </Key>
+          <Property Name="apartment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="house_id" Type="Int32" />
+          <Property Name="flat" Type="Int32" Nullable="false" />
+          <Property Name="number_of_residents__number_of_residents__number_of_residents__number_of_residents__number_of_residents_" Type="Int32" Nullable="false" />
+          <Property Name="square" Type="Single" Nullable="false" />
+          <NavigationProperty Name="House" Relationship="Self.FK_Apartment_House" FromRole="Apartment" ToRole="House" />
+          <NavigationProperty Name="Counter" Relationship="Self.FK_Counter_Apartment" FromRole="Apartment" ToRole="Counter" />
+          <NavigationProperty Name="Personal_account" Relationship="Self.FK_Personal_account_Apartment" FromRole="Apartment" ToRole="Personal_account" />
+        </EntityType>
+        <EntityType Name="Benefit">
+          <Key>
+            <PropertyRef Name="benefit_id" />
+          </Key>
+          <Property Name="benefit_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="coefficient" Type="Double" Nullable="false" />
+          <NavigationProperty Name="BenefitService" Relationship="Self.FK_BenefitService_Benefit" FromRole="Benefit" ToRole="BenefitService" />
+          <NavigationProperty Name="OwnerBenefit" Relationship="Self.FK_OwnerBenefit_Benefit" FromRole="Benefit" ToRole="OwnerBenefit" />
+        </EntityType>
+        <EntityType Name="BenefitService">
+          <Key>
+            <PropertyRef Name="benefit_service_id" />
+          </Key>
+          <Property Name="benefit_service_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="benefit_id" Type="Int32" Nullable="false" />
+          <Property Name="service_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Benefit" Relationship="Self.FK_BenefitService_Benefit" FromRole="BenefitService" ToRole="Benefit" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_BenefitService_Service1" FromRole="BenefitService" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="Counter">
+          <Key>
+            <PropertyRef Name="counter_id" />
+          </Key>
+          <Property Name="counter_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="apartment_id" Type="Int32" />
+          <Property Name="service_id" Type="Int32" />
+          <Property Name="indications" Type="Double" Nullable="false" />
+          <Property Name="bit" Type="Boolean" />
+          <NavigationProperty Name="Apartment" Relationship="Self.FK_Counter_Apartment" FromRole="Counter" ToRole="Apartment" />
+          <NavigationProperty Name="HouseService" Relationship="Self.FK_Counter_HouseService" FromRole="Counter" ToRole="HouseService" />
+          <NavigationProperty Name="Public_utilities" Relationship="Self.FK_Public_utilities_Counter" FromRole="Counter" ToRole="Public_utilities" />
+        </EntityType>
+        <EntityType Name="Device">
+          <Key>
+            <PropertyRef Name="metering_device" />
+          </Key>
+          <Property Name="metering_device" Type="Int32" Nullable="false" />
+          <Property Name="device1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="HouseService" Relationship="Self.FK_HouseService_Device" FromRole="Device" ToRole="HouseService" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="gender_id" />
+          </Key>
+          <Property Name="gender_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cut_gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name_gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Owner" Relationship="Self.FK_Owner_Gender" FromRole="Gender" ToRole="Owner" />
+        </EntityType>
+        <EntityType Name="House">
+          <Key>
+            <PropertyRef Name="house_id" />
+          </Key>
+          <Property Name="house_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="house1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="square_residental" Type="Double" />
+          <Property Name="square_nonresidental" Type="Double" />
+          <NavigationProperty Name="Apartment" Relationship="Self.FK_Apartment_House" FromRole="House" ToRole="Apartment" />
+          <NavigationProperty Name="House_counter" Relationship="Self.FK_House_counter_House" FromRole="House" ToRole="House_counter" />
+          <NavigationProperty Name="HouseService" Relationship="Self.FK_HouseService_House" FromRole="House" ToRole="HouseService" />
+          <NavigationProperty Name="Individual_amount" Relationship="Self.FK_Individual_amount_House" FromRole="House" ToRole="Individual_amount" />
+        </EntityType>
+        <EntityType Name="House_counter">
+          <Key>
+            <PropertyRef Name="house_counter_id" />
+          </Key>
+          <Property Name="house_counter_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="house_id" Type="Int32" Nullable="false" />
+          <Property Name="service_id" Type="Int32" Nullable="false" />
+          <Property Name="indication" Type="Double" />
+          <NavigationProperty Name="House" Relationship="Self.FK_House_counter_House" FromRole="House_counter" ToRole="House" />
+          <NavigationProperty Name="HouseService" Relationship="Self.FK_House_counter_HouseService" FromRole="House_counter" ToRole="HouseService" />
+          <NavigationProperty Name="House_public_utilities" Relationship="Self.FK_House_public_utilities_House_counter" FromRole="House_counter" ToRole="House_public_utilities" />
+        </EntityType>
+        <EntityType Name="House_public_utilities">
+          <Key>
+            <PropertyRef Name="house_public_utilities_id" />
+          </Key>
+          <Property Name="house_public_utilities_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="house_service_id" Type="Int32" />
+          <Property Name="used" Type="Single" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="house_counter_id" Type="Int32" />
+          <NavigationProperty Name="House_counter" Relationship="Self.FK_House_public_utilities_House_counter" FromRole="House_public_utilities" ToRole="House_counter" />
+          <NavigationProperty Name="HouseService" Relationship="Self.FK_House_public_utilities_HouseService" FromRole="House_public_utilities" ToRole="HouseService" />
+        </EntityType>
+        <EntityType Name="HouseService">
+          <Key>
+            <PropertyRef Name="house_service_id" />
+          </Key>
+          <Property Name="house_service_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="house_id" Type="Int32" Nullable="false" />
+          <Property Name="service_id" Type="Int32" />
+          <Property Name="rate" Type="Double" />
+          <Property Name="payment_id" Type="Int32" />
+          <Property Name="norm" Type="Double" />
+          <Property Name="device_id" Type="Int32" />
+          <Property Name="high_coef" Type="Double" />
+          <NavigationProperty Name="Counter" Relationship="Self.FK_Counter_HouseService" FromRole="HouseService" ToRole="Counter" />
+          <NavigationProperty Name="Device" Relationship="Self.FK_HouseService_Device" FromRole="HouseService" ToRole="Device" />
+          <NavigationProperty Name="House" Relationship="Self.FK_HouseService_House" FromRole="HouseService" ToRole="House" />
+          <NavigationProperty Name="House_counter" Relationship="Self.FK_House_counter_HouseService" FromRole="HouseService" ToRole="House_counter" />
+          <NavigationProperty Name="House_public_utilities" Relationship="Self.FK_House_public_utilities_HouseService" FromRole="HouseService" ToRole="House_public_utilities" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_HouseService_Service" FromRole="HouseService" ToRole="Service" />
+          <NavigationProperty Name="Type_payment" Relationship="Self.FK_HouseService_Type_payment" FromRole="HouseService" ToRole="Type_payment" />
+          <NavigationProperty Name="Individual_amount" Relationship="Self.FK_Individual_amount_Individual_amount" FromRole="HouseService" ToRole="Individual_amount" />
+          <NavigationProperty Name="Maintenance_and_repair" Relationship="Self.FK_Maintenance_and_repair_HouseService" FromRole="HouseService" ToRole="Maintenance_and_repair" />
+          <NavigationProperty Name="Public_utilities" Relationship="Self.FK_Public_utilities_HouseService" FromRole="HouseService" ToRole="Public_utilities" />
+        </EntityType>
+        <EntityType Name="Individual_amount">
+          <Key>
+            <PropertyRef Name="individual_amount_id" />
+          </Key>
+          <Property Name="individual_amount_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="house_service_id" Type="Int32" />
+          <Property Name="used" Type="Double" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="house_id" Type="Int32" />
+          <NavigationProperty Name="House" Relationship="Self.FK_Individual_amount_House" FromRole="Individual_amount" ToRole="House" />
+          <NavigationProperty Name="HouseService" Relationship="Self.FK_Individual_amount_Individual_amount" FromRole="Individual_amount" ToRole="HouseService" />
+        </EntityType>
+        <EntityType Name="info_UK">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uk_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="INN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="r_s" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name_bank" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="k_s" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BIK" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="adress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Maintenance_and_repair">
+          <Key>
+            <PropertyRef Name="maintenance_repair_id" />
+          </Key>
+          <Property Name="maintenance_repair_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="personal_id" Type="Int32" />
+          <Property Name="house_service_id" Type="Int32" />
+          <Property Name="amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="benefit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="amount_pay" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="HouseService" Relationship="Self.FK_Maintenance_and_repair_HouseService" FromRole="Maintenance_and_repair" ToRole="HouseService" />
+          <NavigationProperty Name="Personal_account" Relationship="Self.FK_Maintenance_and_repair_Personal_account" FromRole="Maintenance_and_repair" ToRole="Personal_account" />
+        </EntityType>
+        <EntityType Name="Owner">
+          <Key>
+            <PropertyRef Name="owner_id" />
+          </Key>
+          <Property Name="owner_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="middle_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="gender_id" Type="Int32" Nullable="false" />
+          <Property Name="birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="phone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="series_passport" Type="Int32" Nullable="false" />
+          <Property Name="number_passport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="date_passport" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="who_issued_passport" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Gender" Relationship="Self.FK_Owner_Gender" FromRole="Owner" ToRole="Gender" />
+          <NavigationProperty Name="OwnerBenefit" Relationship="Self.FK_OwnerBenefit_Owner" FromRole="Owner" ToRole="OwnerBenefit" />
+          <NavigationProperty Name="Personal_account" Relationship="Self.FK_Personal_account_Owner" FromRole="Owner" ToRole="Personal_account" />
+        </EntityType>
+        <EntityType Name="OwnerBenefit">
+          <Key>
+            <PropertyRef Name="owner_benefit_id" />
+          </Key>
+          <Property Name="owner_benefit_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="owner_id" Type="Int32" Nullable="false" />
+          <Property Name="benefit_id" Type="Int32" />
+          <NavigationProperty Name="Benefit" Relationship="Self.FK_OwnerBenefit_Benefit" FromRole="OwnerBenefit" ToRole="Benefit" />
+          <NavigationProperty Name="Owner" Relationship="Self.FK_OwnerBenefit_Owner" FromRole="OwnerBenefit" ToRole="Owner" />
+        </EntityType>
+        <EntityType Name="Personal_account">
+          <Key>
+            <PropertyRef Name="personal_id" />
+          </Key>
+          <Property Name="personal_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="owner_id" Type="Int32" />
+          <Property Name="apartment_id" Type="Int32" />
+          <NavigationProperty Name="Apartment" Relationship="Self.FK_Personal_account_Apartment" FromRole="Personal_account" ToRole="Apartment" />
+          <NavigationProperty Name="Maintenance_and_repair" Relationship="Self.FK_Maintenance_and_repair_Personal_account" FromRole="Personal_account" ToRole="Maintenance_and_repair" />
+          <NavigationProperty Name="Owner" Relationship="Self.FK_Personal_account_Owner" FromRole="Personal_account" ToRole="Owner" />
+          <NavigationProperty Name="Public_utilities" Relationship="Self.FK_Public_utilities_Personal_account" FromRole="Personal_account" ToRole="Public_utilities" />
+          <NavigationProperty Name="Receipt" Relationship="Self.FK_Receipt_Personal_account" FromRole="Personal_account" ToRole="Receipt" />
+        </EntityType>
+        <EntityType Name="Public_utilities">
+          <Key>
+            <PropertyRef Name="public_utilities_id" />
+          </Key>
+          <Property Name="public_utilities_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="counter_id" Type="Int32" />
+          <Property Name="used" Type="Single" Nullable="false" />
+          <Property Name="recalculation" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="amount_pay" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="house_service_id" Type="Int32" />
+          <Property Name="personal_id" Type="Int32" Nullable="false" />
+          <Property Name="size_high_coef" Type="Double" />
+          <Property Name="amount_high_coef" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="benefit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Counter" Relationship="Self.FK_Public_utilities_Counter" FromRole="Public_utilities" ToRole="Counter" />
+          <NavigationProperty Name="HouseService" Relationship="Self.FK_Public_utilities_HouseService" FromRole="Public_utilities" ToRole="HouseService" />
+          <NavigationProperty Name="Personal_account" Relationship="Self.FK_Public_utilities_Personal_account" FromRole="Public_utilities" ToRole="Personal_account" />
+        </EntityType>
+        <EntityType Name="Receipt">
+          <Key>
+            <PropertyRef Name="receipt_id" />
+          </Key>
+          <Property Name="receipt_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="personal_id" Type="Int32" Nullable="false" />
+          <Property Name="amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="debt" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="amount_to_pay" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="penalties" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="date_pay" Type="DateTime" Precision="0" />
+          <Property Name="amount_paid" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="date_pay_before" Type="DateTime" Precision="0" />
+          <Property Name="overpayment" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="last_payment_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Personal_account" Relationship="Self.FK_Receipt_Personal_account" FromRole="Receipt" ToRole="Personal_account" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="service_id" />
+          </Key>
+          <Property Name="service_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_service" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="unit_of_measure" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="type_service_id" Type="Int32" />
+          <NavigationProperty Name="BenefitService" Relationship="Self.FK_BenefitService_Service1" FromRole="Service" ToRole="BenefitService" />
+          <NavigationProperty Name="HouseService" Relationship="Self.FK_HouseService_Service" FromRole="Service" ToRole="HouseService" />
+          <NavigationProperty Name="Type_service" Relationship="Self.FK_Service_Type_service" FromRole="Service" ToRole="Type_service" />
+          <NavigationProperty Name="Type_payment" Relationship="Self.FK_Type_payment_Service" FromRole="Service" ToRole="Type_payment" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Type_payment">
+          <Key>
+            <PropertyRef Name="payment_id" />
+          </Key>
+          <Property Name="payment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="service_id" Type="Int32" />
+          <Property Name="type_payment1" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="HouseService" Relationship="Self.FK_HouseService_Type_payment" FromRole="Type_payment" ToRole="HouseService" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_Type_payment_Service" FromRole="Type_payment" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="Type_service">
+          <Key>
+            <PropertyRef Name="type_service_id" />
+          </Key>
+          <Property Name="type_service_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_Service_Type_service" FromRole="Type_service" ToRole="Service" />
+        </EntityType>
+        <Association Name="FK_Apartment_House">
+          <End Role="House" Type="Self.House" Multiplicity="0..1" />
+          <End Role="Apartment" Type="Self.Apartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House">
+              <PropertyRef Name="house_id" />
+            </Principal>
+            <Dependent Role="Apartment">
+              <PropertyRef Name="house_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Counter_Apartment">
+          <End Role="Apartment" Type="Self.Apartment" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Counter" Type="Self.Counter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apartment">
+              <PropertyRef Name="apartment_id" />
+            </Principal>
+            <Dependent Role="Counter">
+              <PropertyRef Name="apartment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personal_account_Apartment">
+          <End Role="Apartment" Type="Self.Apartment" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Personal_account" Type="Self.Personal_account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apartment">
+              <PropertyRef Name="apartment_id" />
+            </Principal>
+            <Dependent Role="Personal_account">
+              <PropertyRef Name="apartment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BenefitService_Benefit">
+          <End Role="Benefit" Type="Self.Benefit" Multiplicity="1" />
+          <End Role="BenefitService" Type="Self.BenefitService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Benefit">
+              <PropertyRef Name="benefit_id" />
+            </Principal>
+            <Dependent Role="BenefitService">
+              <PropertyRef Name="benefit_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OwnerBenefit_Benefit">
+          <End Role="Benefit" Type="Self.Benefit" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OwnerBenefit" Type="Self.OwnerBenefit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Benefit">
+              <PropertyRef Name="benefit_id" />
+            </Principal>
+            <Dependent Role="OwnerBenefit">
+              <PropertyRef Name="benefit_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BenefitService_Service1">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="BenefitService" Type="Self.BenefitService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="service_id" />
+            </Principal>
+            <Dependent Role="BenefitService">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Counter_HouseService">
+          <End Role="HouseService" Type="Self.HouseService" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Counter" Type="Self.Counter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HouseService">
+              <PropertyRef Name="house_service_id" />
+            </Principal>
+            <Dependent Role="Counter">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Public_utilities_Counter">
+          <End Role="Counter" Type="Self.Counter" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Public_utilities" Type="Self.Public_utilities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Counter">
+              <PropertyRef Name="counter_id" />
+            </Principal>
+            <Dependent Role="Public_utilities">
+              <PropertyRef Name="counter_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HouseService_Device">
+          <End Role="Device" Type="Self.Device" Multiplicity="0..1" />
+          <End Role="HouseService" Type="Self.HouseService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="metering_device" />
+            </Principal>
+            <Dependent Role="HouseService">
+              <PropertyRef Name="device_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Owner_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="Owner" Type="Self.Owner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="gender_id" />
+            </Principal>
+            <Dependent Role="Owner">
+              <PropertyRef Name="gender_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_House_counter_House">
+          <End Role="House" Type="Self.House" Multiplicity="1" />
+          <End Role="House_counter" Type="Self.House_counter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House">
+              <PropertyRef Name="house_id" />
+            </Principal>
+            <Dependent Role="House_counter">
+              <PropertyRef Name="house_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HouseService_House">
+          <End Role="House" Type="Self.House" Multiplicity="1" />
+          <End Role="HouseService" Type="Self.HouseService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House">
+              <PropertyRef Name="house_id" />
+            </Principal>
+            <Dependent Role="HouseService">
+              <PropertyRef Name="house_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Individual_amount_House">
+          <End Role="House" Type="Self.House" Multiplicity="0..1" />
+          <End Role="Individual_amount" Type="Self.Individual_amount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House">
+              <PropertyRef Name="house_id" />
+            </Principal>
+            <Dependent Role="Individual_amount">
+              <PropertyRef Name="house_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_House_counter_HouseService">
+          <End Role="HouseService" Type="Self.HouseService" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="House_counter" Type="Self.House_counter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HouseService">
+              <PropertyRef Name="house_service_id" />
+            </Principal>
+            <Dependent Role="House_counter">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_House_public_utilities_House_counter">
+          <End Role="House_counter" Type="Self.House_counter" Multiplicity="0..1" />
+          <End Role="House_public_utilities" Type="Self.House_public_utilities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House_counter">
+              <PropertyRef Name="house_counter_id" />
+            </Principal>
+            <Dependent Role="House_public_utilities">
+              <PropertyRef Name="house_counter_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_House_public_utilities_HouseService">
+          <End Role="HouseService" Type="Self.HouseService" Multiplicity="0..1" />
+          <End Role="House_public_utilities" Type="Self.House_public_utilities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HouseService">
+              <PropertyRef Name="house_service_id" />
+            </Principal>
+            <Dependent Role="House_public_utilities">
+              <PropertyRef Name="house_service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HouseService_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HouseService" Type="Self.HouseService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="service_id" />
+            </Principal>
+            <Dependent Role="HouseService">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HouseService_Type_payment">
+          <End Role="Type_payment" Type="Self.Type_payment" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HouseService" Type="Self.HouseService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_payment">
+              <PropertyRef Name="payment_id" />
+            </Principal>
+            <Dependent Role="HouseService">
+              <PropertyRef Name="payment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Individual_amount_Individual_amount">
+          <End Role="HouseService" Type="Self.HouseService" Multiplicity="0..1" />
+          <End Role="Individual_amount" Type="Self.Individual_amount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HouseService">
+              <PropertyRef Name="house_service_id" />
+            </Principal>
+            <Dependent Role="Individual_amount">
+              <PropertyRef Name="house_service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Maintenance_and_repair_HouseService">
+          <End Role="HouseService" Type="Self.HouseService" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Maintenance_and_repair" Type="Self.Maintenance_and_repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HouseService">
+              <PropertyRef Name="house_service_id" />
+            </Principal>
+            <Dependent Role="Maintenance_and_repair">
+              <PropertyRef Name="house_service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Public_utilities_HouseService">
+          <End Role="HouseService" Type="Self.HouseService" Multiplicity="0..1" />
+          <End Role="Public_utilities" Type="Self.Public_utilities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HouseService">
+              <PropertyRef Name="house_service_id" />
+            </Principal>
+            <Dependent Role="Public_utilities">
+              <PropertyRef Name="house_service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Maintenance_and_repair_Personal_account">
+          <End Role="Personal_account" Type="Self.Personal_account" Multiplicity="0..1" />
+          <End Role="Maintenance_and_repair" Type="Self.Maintenance_and_repair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_account">
+              <PropertyRef Name="personal_id" />
+            </Principal>
+            <Dependent Role="Maintenance_and_repair">
+              <PropertyRef Name="personal_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OwnerBenefit_Owner">
+          <End Role="Owner" Type="Self.Owner" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OwnerBenefit" Type="Self.OwnerBenefit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owner">
+              <PropertyRef Name="owner_id" />
+            </Principal>
+            <Dependent Role="OwnerBenefit">
+              <PropertyRef Name="owner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personal_account_Owner">
+          <End Role="Owner" Type="Self.Owner" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Personal_account" Type="Self.Personal_account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owner">
+              <PropertyRef Name="owner_id" />
+            </Principal>
+            <Dependent Role="Personal_account">
+              <PropertyRef Name="owner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Public_utilities_Personal_account">
+          <End Role="Personal_account" Type="Self.Personal_account" Multiplicity="1" />
+          <End Role="Public_utilities" Type="Self.Public_utilities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_account">
+              <PropertyRef Name="personal_id" />
+            </Principal>
+            <Dependent Role="Public_utilities">
+              <PropertyRef Name="personal_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipt_Personal_account">
+          <End Role="Personal_account" Type="Self.Personal_account" Multiplicity="1" />
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal_account">
+              <PropertyRef Name="personal_id" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="personal_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Type_service">
+          <End Role="Type_service" Type="Self.Type_service" Multiplicity="0..1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_service">
+              <PropertyRef Name="type_service_id" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="type_service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Type_payment_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
+          <End Role="Type_payment" Type="Self.Type_payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="service_id" />
+            </Principal>
+            <Dependent Role="Type_payment">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="municipalDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Apartment" EntityType="Self.Apartment" />
+          <EntitySet Name="Benefit" EntityType="Self.Benefit" />
+          <EntitySet Name="BenefitService" EntityType="Self.BenefitService" />
+          <EntitySet Name="Counter" EntityType="Self.Counter" />
+          <EntitySet Name="Device" EntityType="Self.Device" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" />
+          <EntitySet Name="House" EntityType="Self.House" />
+          <EntitySet Name="House_counter" EntityType="Self.House_counter" />
+          <EntitySet Name="House_public_utilities" EntityType="Self.House_public_utilities" />
+          <EntitySet Name="HouseService" EntityType="Self.HouseService" />
+          <EntitySet Name="Individual_amount" EntityType="Self.Individual_amount" />
+          <EntitySet Name="info_UK" EntityType="Self.info_UK" />
+          <EntitySet Name="Maintenance_and_repair" EntityType="Self.Maintenance_and_repair" />
+          <EntitySet Name="Owner" EntityType="Self.Owner" />
+          <EntitySet Name="OwnerBenefit" EntityType="Self.OwnerBenefit" />
+          <EntitySet Name="Personal_account" EntityType="Self.Personal_account" />
+          <EntitySet Name="Public_utilities" EntityType="Self.Public_utilities" />
+          <EntitySet Name="Receipt" EntityType="Self.Receipt" />
+          <EntitySet Name="Service" EntityType="Self.Service" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Type_payment" EntityType="Self.Type_payment" />
+          <EntitySet Name="Type_service" EntityType="Self.Type_service" />
+          <AssociationSet Name="FK_Apartment_House" Association="Self.FK_Apartment_House">
+            <End Role="House" EntitySet="House" />
+            <End Role="Apartment" EntitySet="Apartment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Counter_Apartment" Association="Self.FK_Counter_Apartment">
+            <End Role="Apartment" EntitySet="Apartment" />
+            <End Role="Counter" EntitySet="Counter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personal_account_Apartment" Association="Self.FK_Personal_account_Apartment">
+            <End Role="Apartment" EntitySet="Apartment" />
+            <End Role="Personal_account" EntitySet="Personal_account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BenefitService_Benefit" Association="Self.FK_BenefitService_Benefit">
+            <End Role="Benefit" EntitySet="Benefit" />
+            <End Role="BenefitService" EntitySet="BenefitService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OwnerBenefit_Benefit" Association="Self.FK_OwnerBenefit_Benefit">
+            <End Role="Benefit" EntitySet="Benefit" />
+            <End Role="OwnerBenefit" EntitySet="OwnerBenefit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BenefitService_Service1" Association="Self.FK_BenefitService_Service1">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="BenefitService" EntitySet="BenefitService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Counter_HouseService" Association="Self.FK_Counter_HouseService">
+            <End Role="HouseService" EntitySet="HouseService" />
+            <End Role="Counter" EntitySet="Counter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Public_utilities_Counter" Association="Self.FK_Public_utilities_Counter">
+            <End Role="Counter" EntitySet="Counter" />
+            <End Role="Public_utilities" EntitySet="Public_utilities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HouseService_Device" Association="Self.FK_HouseService_Device">
+            <End Role="Device" EntitySet="Device" />
+            <End Role="HouseService" EntitySet="HouseService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Owner_Gender" Association="Self.FK_Owner_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Owner" EntitySet="Owner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_House_counter_House" Association="Self.FK_House_counter_House">
+            <End Role="House" EntitySet="House" />
+            <End Role="House_counter" EntitySet="House_counter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HouseService_House" Association="Self.FK_HouseService_House">
+            <End Role="House" EntitySet="House" />
+            <End Role="HouseService" EntitySet="HouseService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Individual_amount_House" Association="Self.FK_Individual_amount_House">
+            <End Role="House" EntitySet="House" />
+            <End Role="Individual_amount" EntitySet="Individual_amount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_House_counter_HouseService" Association="Self.FK_House_counter_HouseService">
+            <End Role="HouseService" EntitySet="HouseService" />
+            <End Role="House_counter" EntitySet="House_counter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_House_public_utilities_House_counter" Association="Self.FK_House_public_utilities_House_counter">
+            <End Role="House_counter" EntitySet="House_counter" />
+            <End Role="House_public_utilities" EntitySet="House_public_utilities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_House_public_utilities_HouseService" Association="Self.FK_House_public_utilities_HouseService">
+            <End Role="HouseService" EntitySet="HouseService" />
+            <End Role="House_public_utilities" EntitySet="House_public_utilities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HouseService_Service" Association="Self.FK_HouseService_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="HouseService" EntitySet="HouseService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HouseService_Type_payment" Association="Self.FK_HouseService_Type_payment">
+            <End Role="Type_payment" EntitySet="Type_payment" />
+            <End Role="HouseService" EntitySet="HouseService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Individual_amount_Individual_amount" Association="Self.FK_Individual_amount_Individual_amount">
+            <End Role="HouseService" EntitySet="HouseService" />
+            <End Role="Individual_amount" EntitySet="Individual_amount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Maintenance_and_repair_HouseService" Association="Self.FK_Maintenance_and_repair_HouseService">
+            <End Role="HouseService" EntitySet="HouseService" />
+            <End Role="Maintenance_and_repair" EntitySet="Maintenance_and_repair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Public_utilities_HouseService" Association="Self.FK_Public_utilities_HouseService">
+            <End Role="HouseService" EntitySet="HouseService" />
+            <End Role="Public_utilities" EntitySet="Public_utilities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Maintenance_and_repair_Personal_account" Association="Self.FK_Maintenance_and_repair_Personal_account">
+            <End Role="Personal_account" EntitySet="Personal_account" />
+            <End Role="Maintenance_and_repair" EntitySet="Maintenance_and_repair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OwnerBenefit_Owner" Association="Self.FK_OwnerBenefit_Owner">
+            <End Role="Owner" EntitySet="Owner" />
+            <End Role="OwnerBenefit" EntitySet="OwnerBenefit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personal_account_Owner" Association="Self.FK_Personal_account_Owner">
+            <End Role="Owner" EntitySet="Owner" />
+            <End Role="Personal_account" EntitySet="Personal_account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Public_utilities_Personal_account" Association="Self.FK_Public_utilities_Personal_account">
+            <End Role="Personal_account" EntitySet="Personal_account" />
+            <End Role="Public_utilities" EntitySet="Public_utilities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipt_Personal_account" Association="Self.FK_Receipt_Personal_account">
+            <End Role="Personal_account" EntitySet="Personal_account" />
+            <End Role="Receipt" EntitySet="Receipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Type_service" Association="Self.FK_Service_Type_service">
+            <End Role="Type_service" EntitySet="Type_service" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Type_payment_Service" Association="Self.FK_Type_payment_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="Type_payment" EntitySet="Type_payment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище municipalDBModelContainer" CdmEntityContainer="municipalDBEntities">
+          <EntitySetMapping Name="Apartment">
+            <EntityTypeMapping TypeName="municipalDBModel.Apartment">
+              <MappingFragment StoreEntitySet="Apartment">
+                <ScalarProperty Name="apartment_id" ColumnName="apartment_id" />
+                <ScalarProperty Name="house_id" ColumnName="house_id" />
+                <ScalarProperty Name="flat" ColumnName="flat" />
+                <ScalarProperty Name="number_of_residents__number_of_residents__number_of_residents__number_of_residents__number_of_residents_" ColumnName="number of residents&#xD;&#xA;number of residents&#xD;&#xA;number of residents&#xD;&#xA;number of residents&#xD;&#xA;number_of_residents]" />
+                <ScalarProperty Name="square" ColumnName="square" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Benefit">
+            <EntityTypeMapping TypeName="municipalDBModel.Benefit">
+              <MappingFragment StoreEntitySet="Benefit">
+                <ScalarProperty Name="benefit_id" ColumnName="benefit_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="coefficient" ColumnName="coefficient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BenefitService">
+            <EntityTypeMapping TypeName="municipalDBModel.BenefitService">
+              <MappingFragment StoreEntitySet="BenefitService">
+                <ScalarProperty Name="benefit_service_id" ColumnName="benefit_service_id" />
+                <ScalarProperty Name="benefit_id" ColumnName="benefit_id" />
+                <ScalarProperty Name="service_id" ColumnName="service_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Counter">
+            <EntityTypeMapping TypeName="municipalDBModel.Counter">
+              <MappingFragment StoreEntitySet="Counter">
+                <ScalarProperty Name="counter_id" ColumnName="counter_id" />
+                <ScalarProperty Name="apartment_id" ColumnName="apartment_id" />
+                <ScalarProperty Name="service_id" ColumnName="service_id" />
+                <ScalarProperty Name="indications" ColumnName="indications" />
+                <ScalarProperty Name="bit" ColumnName="bit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Device">
+            <EntityTypeMapping TypeName="municipalDBModel.Device">
+              <MappingFragment StoreEntitySet="Device">
+                <ScalarProperty Name="metering_device" ColumnName="metering_device" />
+                <ScalarProperty Name="device1" ColumnName="device" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gender">
+            <EntityTypeMapping TypeName="municipalDBModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="gender_id" ColumnName="gender_id" />
+                <ScalarProperty Name="cut_gender" ColumnName="cut_gender" />
+                <ScalarProperty Name="name_gender" ColumnName="name_gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="House">
+            <EntityTypeMapping TypeName="municipalDBModel.House">
+              <MappingFragment StoreEntitySet="House">
+                <ScalarProperty Name="house_id" ColumnName="house_id" />
+                <ScalarProperty Name="region" ColumnName="region" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="house1" ColumnName="house" />
+                <ScalarProperty Name="square_residental" ColumnName="square_residental" />
+                <ScalarProperty Name="square_nonresidental" ColumnName="square_nonresidental" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="House_counter">
+            <EntityTypeMapping TypeName="municipalDBModel.House_counter">
+              <MappingFragment StoreEntitySet="House_counter">
+                <ScalarProperty Name="house_counter_id" ColumnName="house_counter_id" />
+                <ScalarProperty Name="house_id" ColumnName="house_id" />
+                <ScalarProperty Name="service_id" ColumnName="service_id" />
+                <ScalarProperty Name="indication" ColumnName="indication" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="House_public_utilities">
+            <EntityTypeMapping TypeName="municipalDBModel.House_public_utilities">
+              <MappingFragment StoreEntitySet="House_public_utilities">
+                <ScalarProperty Name="house_public_utilities_id" ColumnName="house_public_utilities_id" />
+                <ScalarProperty Name="house_service_id" ColumnName="house_service_id" />
+                <ScalarProperty Name="used" ColumnName="used" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="house_counter_id" ColumnName="house_counter_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HouseService">
+            <EntityTypeMapping TypeName="municipalDBModel.HouseService">
+              <MappingFragment StoreEntitySet="HouseService">
+                <ScalarProperty Name="house_service_id" ColumnName="house_service_id" />
+                <ScalarProperty Name="house_id" ColumnName="house_id" />
+                <ScalarProperty Name="service_id" ColumnName="service_id" />
+                <ScalarProperty Name="rate" ColumnName="rate" />
+                <ScalarProperty Name="payment_id" ColumnName="payment_id" />
+                <ScalarProperty Name="norm" ColumnName="norm" />
+                <ScalarProperty Name="device_id" ColumnName="device_id" />
+                <ScalarProperty Name="high_coef" ColumnName="high_coef" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Individual_amount">
+            <EntityTypeMapping TypeName="municipalDBModel.Individual_amount">
+              <MappingFragment StoreEntitySet="Individual_amount">
+                <ScalarProperty Name="individual_amount_id" ColumnName="individual_amount_id" />
+                <ScalarProperty Name="house_service_id" ColumnName="house_service_id" />
+                <ScalarProperty Name="used" ColumnName="used" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="house_id" ColumnName="house_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="info_UK">
+            <EntityTypeMapping TypeName="municipalDBModel.info_UK">
+              <MappingFragment StoreEntitySet="info_UK">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="uk_name" ColumnName="uk_name" />
+                <ScalarProperty Name="INN" ColumnName="INN" />
+                <ScalarProperty Name="r_s" ColumnName="r/s" />
+                <ScalarProperty Name="name_bank" ColumnName="name_bank" />
+                <ScalarProperty Name="k_s" ColumnName="k/s" />
+                <ScalarProperty Name="BIK" ColumnName="BIK" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Maintenance_and_repair">
+            <EntityTypeMapping TypeName="municipalDBModel.Maintenance_and_repair">
+              <MappingFragment StoreEntitySet="Maintenance_and_repair">
+                <ScalarProperty Name="maintenance_repair_id" ColumnName="maintenance_repair_id" />
+                <ScalarProperty Name="personal_id" ColumnName="personal_id" />
+                <ScalarProperty Name="house_service_id" ColumnName="house_service_id" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="benefit" ColumnName="benefit" />
+                <ScalarProperty Name="amount_pay" ColumnName="amount_pay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Owner">
+            <EntityTypeMapping TypeName="municipalDBModel.Owner">
+              <MappingFragment StoreEntitySet="Owner">
+                <ScalarProperty Name="owner_id" ColumnName="owner_id" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
+                <ScalarProperty Name="gender_id" ColumnName="gender_id" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="series_passport" ColumnName="series_passport" />
+                <ScalarProperty Name="number_passport" ColumnName="number_passport" />
+                <ScalarProperty Name="date_passport" ColumnName="date_passport" />
+                <ScalarProperty Name="who_issued_passport" ColumnName="who_issued_passport" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OwnerBenefit">
+            <EntityTypeMapping TypeName="municipalDBModel.OwnerBenefit">
+              <MappingFragment StoreEntitySet="OwnerBenefit">
+                <ScalarProperty Name="owner_benefit_id" ColumnName="owner_benefit_id" />
+                <ScalarProperty Name="owner_id" ColumnName="owner_id" />
+                <ScalarProperty Name="benefit_id" ColumnName="benefit_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personal_account">
+            <EntityTypeMapping TypeName="municipalDBModel.Personal_account">
+              <MappingFragment StoreEntitySet="Personal_account">
+                <ScalarProperty Name="personal_id" ColumnName="personal_id" />
+                <ScalarProperty Name="owner_id" ColumnName="owner_id" />
+                <ScalarProperty Name="apartment_id" ColumnName="apartment_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Public_utilities">
+            <EntityTypeMapping TypeName="municipalDBModel.Public_utilities">
+              <MappingFragment StoreEntitySet="Public_utilities">
+                <ScalarProperty Name="public_utilities_id" ColumnName="public_utilities_id" />
+                <ScalarProperty Name="counter_id" ColumnName="counter_id" />
+                <ScalarProperty Name="used" ColumnName="used" />
+                <ScalarProperty Name="recalculation" ColumnName="recalculation" />
+                <ScalarProperty Name="amount_pay" ColumnName="amount_pay" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="house_service_id" ColumnName="house_service_id" />
+                <ScalarProperty Name="personal_id" ColumnName="personal_id" />
+                <ScalarProperty Name="size_high_coef" ColumnName="size_high_coef" />
+                <ScalarProperty Name="amount_high_coef" ColumnName="amount_high_coef" />
+                <ScalarProperty Name="benefit" ColumnName="benefit" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Receipt">
+            <EntityTypeMapping TypeName="municipalDBModel.Receipt">
+              <MappingFragment StoreEntitySet="Receipt">
+                <ScalarProperty Name="receipt_id" ColumnName="receipt_id" />
+                <ScalarProperty Name="personal_id" ColumnName="personal_id" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="debt" ColumnName="debt" />
+                <ScalarProperty Name="amount_to_pay" ColumnName="amount_to_pay" />
+                <ScalarProperty Name="penalties" ColumnName="penalties" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="date_pay" ColumnName="date_pay" />
+                <ScalarProperty Name="amount_paid" ColumnName="amount_paid" />
+                <ScalarProperty Name="date_pay_before" ColumnName="date_pay_before" />
+                <ScalarProperty Name="overpayment" ColumnName="overpayment" />
+                <ScalarProperty Name="last_payment_date" ColumnName="last_payment_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Service">
+            <EntityTypeMapping TypeName="municipalDBModel.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="service_id" ColumnName="service_id" />
+                <ScalarProperty Name="name_service" ColumnName="name_service" />
+                <ScalarProperty Name="unit_of_measure" ColumnName="unit_of_measure" />
+                <ScalarProperty Name="type_service_id" ColumnName="type_service_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="municipalDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_payment">
+            <EntityTypeMapping TypeName="municipalDBModel.Type_payment">
+              <MappingFragment StoreEntitySet="Type_payment">
+                <ScalarProperty Name="payment_id" ColumnName="payment_id" />
+                <ScalarProperty Name="service_id" ColumnName="service_id" />
+                <ScalarProperty Name="type_payment1" ColumnName="type_payment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_service">
+            <EntityTypeMapping TypeName="municipalDBModel.Type_service">
+              <MappingFragment StoreEntitySet="Type_service">
+                <ScalarProperty Name="type_service_id" ColumnName="type_service_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

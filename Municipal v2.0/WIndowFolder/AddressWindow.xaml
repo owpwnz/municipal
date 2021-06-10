@@ -1,0 +1,138 @@
+﻿<mah:MetroWindow x:Class="Municipal_v2._0.WIndowFolder.AddressWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:Municipal_v2._0.WIndowFolder"
+        mc:Ignorable="d"
+        Title="КВАРТИРЫ И ДОМА" Height="788" Width="1358">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1"/>
+            <RowDefinition Height="787"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="665"/>
+            <ColumnDefinition Width="665"/>
+        </Grid.ColumnDefinitions>
+
+
+        <Grid Grid.Column="0" Grid.Row="1">
+            <Border Background="#FF767676"  Height="35" BorderBrush="Black" BorderThickness="1" Margin="27,-339,29,371">
+                <TextBlock Text="Дома" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,0" FontFamily="Agency FB" FontWeight="Bold"/>
+            </Border>
+
+            <Grid>
+                <Line X1="20"  Margin="7,39,0,0"  Stroke="Black"/>
+                <Line X1="20"  Margin="637,39,0,0"  Stroke="Black"/>
+                <Line Y1="700"  Margin="7,39,0,0"  Stroke="Black"/>
+                <Line Y1="700"  Margin="657,39,0,0"  Stroke="Black"/>
+                <Line X1="0" X2="650" Y1="100" Y2="100" Margin="7,639,0,0" Stroke="Black"/>
+            </Grid>
+
+            <Grid Margin="9,57,16,16">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <DataGrid x:Name="houseDataGrid" ItemsSource="{Binding Houses}" IsReadOnly="True" SelectedItem="{Binding selectedHouse}" Grid.Row="1"  AutoGenerateColumns="False" SelectionChanged="houseDataGrid_SelectionChanged" Margin="0,0,0,44">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Область" Binding="{Binding region}"/>
+                        <DataGridTextColumn Header="Город" Binding="{Binding city}"/>
+                        <DataGridTextColumn Header="Улица" Binding="{Binding street}"/>
+                        <DataGridTextColumn Header="Дом" Binding="{Binding house1}"/>
+
+
+                        <DataGridTemplateColumn MinWidth="100" Header="Услуги" CanUserSort="True" CanUserResize="False">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Name="aboutHouseServiceButton"  Click="aboutHouseServiceButton_Click" IsEnabled="True" Content="Просмотреть"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn MinWidth="100" Header="Счечтчики" CanUserSort="True" CanUserResize="False">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Name="aboutHouseCounterButton" Click="aboutHouseCounterButton_Click" IsEnabled="True" Content="Просмотреть"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Button Margin="10,0,0,0" Width="100" Height="26" Content="Добавить" x:Name="addHouseButton" Click="addHouseButton_Click"/>
+                    <Button Margin="10,0,0,0" Width="100" Height="26" Content="Удалить" x:Name="deleteHouseButton" Click="deleteHouseButton_Click"/>
+                    <Button Margin="10,10,0,9" Width="110" Height="26" Content="Добавить услуги" x:Name="addHouseServiceButton" Click="addHouseServiceButton_Click"/>
+                    <Button Margin="10,10,0,9" Width="110" Height="26" Content="Добавить счетч." x:Name="addHouseCounter" Click="addHouseCounter_Click"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Border Background="#FF767676"  Height="35" BorderBrush="Black" BorderThickness="1" Margin="27,-339,29,371">
+                <TextBlock Text="Квартиры" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,0" FontFamily="Agency FB" FontWeight="Bold"/>
+            </Border>
+
+            <Grid>
+                <Line X1="20"  Margin="7,39,0,0"  Stroke="Black"/>
+                <Line X1="20"  Margin="637,39,0,0"  Stroke="Black"/>
+                <Line Y1="700"  Margin="7,39,0,0"  Stroke="Black"/>
+                <Line Y1="700"  Margin="657,39,0,0"  Stroke="Black"/>
+                <Line X1="0" X2="650" Y1="100" Y2="100" Margin="7,639,0,0" Stroke="Black"/>
+            </Grid>
+
+            <Grid Margin="9,57,16,16">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <DataGrid x:Name="apartmentDataGrid"  Grid.Row="1" SelectedItem="{Binding selectedApartment}" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0,0,44">
+                    <DataGrid.Columns>
+
+                        <DataGridTemplateColumn Header="Адрес" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <TextBlock Text="г. "/>
+                                        <TextBlock Text="{Binding House.city}"/>
+                                        <TextBlock Text=" ул. "/>
+                                        <TextBlock  Text="{Binding House.street}"/>
+                                        <TextBlock Text=" д. "/>
+                                        <TextBlock Text="{Binding House.house1}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn Header="Квартира №" Binding="{Binding flat}"/>
+                        <DataGridTextColumn Header="Кол.во" Binding="{Binding number_of_residents__number_of_residents__number_of_residents__number_of_residents__number_of_residents_}"/>
+                        <DataGridTextColumn Header="Площадь" Binding="{Binding square}"/>
+
+                        <DataGridTemplateColumn MinWidth="100" Header="СЧЕТЧИКИ" CanUserSort="True" CanUserResize="False">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Name="abouDataGridButton" Click="abouDataGridButton_Click" IsEnabled="True" Content="Просмотреть"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Button Margin="10,0,0,0" Width="100" Height="26" Content="Добавить кв." Click="addApartmentButton_Click" x:Name="addApartmentButton"/>
+                    <Button Margin="10,0,0,0" Width="100" Height="26" Content="Добавить счет." x:Name="addCounterButton" Click="addCounterButton_Click"/>
+                    <Button Margin="10,0,0,0" Width="100" Height="26" Content="Изменить" x:Name="changeApartmentButton" Click="changeApartmentButton_Click"/>
+                    <Button Margin="10,0,0,0" Width="80" Height="26" Content="Удалить" x:Name="deleteApartmentButton" Click="deleteApartmentButton_Click"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</mah:MetroWindow>

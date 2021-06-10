@@ -1,0 +1,81 @@
+﻿<mah:MetroWindow x:Class="Municipal_v2._0.AddWIndowFolder.ChangeApartment"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:Municipal_v2._0.AddWIndowFolder"
+        mc:Ignorable="d"
+        Title="Изменение квартиры" Height="356.509" Width="500.831">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Border Background="#FF767676"  Height="35" BorderBrush="Black" BorderThickness="1" Margin="27,20,29,271">
+            <TextBlock Text="Квартира" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,0" FontFamily="Agency FB" FontWeight="Bold"/>
+        </Border>
+        <Grid>
+            <Line X1="20"  Margin="7,39,0,0"  Stroke="Black"/>
+            <Line X1="20"  Margin="471,39,-7,0"  Stroke="Black"/>
+            <Line Y1="280"  Margin="7,39,0,0"  Stroke="Black"/>
+            <Line Y1="280"  Margin="491,39,-7,0"  Stroke="Black"/>
+            <Line X1="0" X2="484" Y1="100" Y2="100" Margin="7,219,0,0" Stroke="Black"/>
+        </Grid>
+
+        <Grid Margin="11,57,11,8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="85"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Label Content="Дом"  VerticalAlignment="Center" Margin="0,30,0,29" Width="62"/>
+
+                <ComboBox x:Name="houseComboBox" SelectedItem="{Binding House}" Width="410" Margin="0,5" IsEnabled="False">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding region}"/>
+
+                                <TextBlock Text="{Binding city}"/>
+
+                                <TextBlock Text="{Binding street}"/>
+
+                                <TextBlock Text="{Binding house1}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <Label Content="Квартира" VerticalAlignment="Center" />
+                <TextBox Width="70" Margin="0,5" Text="{Binding flat}" IsEnabled="False"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal">
+                <Label Content="Кол.во" VerticalAlignment="Center" Margin="0,10,0,9" Width="62"/>
+                <TextBox Width="70" Margin="0,5" Text="{Binding number_of_residents__number_of_residents__number_of_residents__number_of_residents__number_of_residents_}" />
+                <Label Content="л." VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="3" Orientation="Horizontal">
+                <Label Content="Площадь" VerticalAlignment="Center" Margin="0,10,0,9" Width="62"/>
+                <TextBox Width="70" Margin="0,5" Text="{Binding square}" IsEnabled="False"/>
+                <Label VerticalAlignment="Center" Content="м3"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="4"  VerticalAlignment="Center" >
+                <Button Width="100" Margin="250,0,0,0" Content="Сохранить" x:Name="addApartment" Click="addApartment_Click"/>
+                <Button Width="100" Margin="5,0,0,0" Content="Назад" x:Name="back" Click="back_Click"/>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</mah:MetroWindow>

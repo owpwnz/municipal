@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fc6c87b4fc6643cd99862347ed8ce3a1" Name="Diagram1">
+        <EntityTypeShape EntityType="municipalDBModel.Apartment" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="municipalDBModel.Benefit" Width="1.5" PointX="8.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="municipalDBModel.BenefitService" Width="1.5" PointX="13" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="municipalDBModel.Counter" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="municipalDBModel.Device" Width="1.5" PointX="0.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="municipalDBModel.Gender" Width="1.5" PointX="3.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="municipalDBModel.House" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="municipalDBModel.House_counter" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="municipalDBModel.House_public_utilities" Width="1.5" PointX="5.25" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="municipalDBModel.HouseService" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="municipalDBModel.Individual_amount" Width="1.5" PointX="8.25" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="municipalDBModel.info_UK" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="municipalDBModel.Maintenance_and_repair" Width="1.5" PointX="10.5" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="municipalDBModel.Owner" Width="1.5" PointX="6" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="municipalDBModel.OwnerBenefit" Width="1.5" PointX="11" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="municipalDBModel.Personal_account" Width="1.5" PointX="8.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="municipalDBModel.Public_utilities" Width="1.5" PointX="13.5" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="municipalDBModel.Receipt" Width="1.5" PointX="10.5" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="municipalDBModel.Service" Width="1.5" PointX="0.75" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="municipalDBModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="municipalDBModel.Type_payment" Width="1.5" PointX="0.75" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="municipalDBModel.Type_service" Width="1.5" PointX="1.5" PointY="20.875" IsExpanded="true" />
+        <AssociationConnector Association="municipalDBModel.FK_Apartment_House" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_Counter_Apartment" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_Personal_account_Apartment" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_BenefitService_Benefit" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_OwnerBenefit_Benefit" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_BenefitService_Service1" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_Counter_HouseService" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_Public_utilities_Counter" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_HouseService_Device" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_Owner_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_House_counter_House" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_HouseService_House" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_Individual_amount_House" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_House_counter_HouseService" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_House_public_utilities_House_counter" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_House_public_utilities_HouseService" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_HouseService_Service" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_HouseService_Type_payment" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_Individual_amount_Individual_amount" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_Maintenance_and_repair_HouseService" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_Public_utilities_HouseService" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_Maintenance_and_repair_Personal_account" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_OwnerBenefit_Owner" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_Personal_account_Owner" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_Public_utilities_Personal_account" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_Receipt_Personal_account" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_Service_Type_service" ManuallyRouted="false" />
+        <AssociationConnector Association="municipalDBModel.FK_Type_payment_Service" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

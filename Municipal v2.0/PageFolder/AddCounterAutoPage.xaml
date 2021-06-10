@@ -1,0 +1,81 @@
+﻿<Page x:Class="Municipal_v2._0.PageFolder.AddCounterAutoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Municipal_v2._0.PageFolder"
+      mc:Ignorable="d" 
+      d:DesignHeight="365" d:DesignWidth="597.436"
+      Title="AddCounterAutoPage">
+    <Grid>
+        <Border Background="#FF767676" BorderBrush="Black" BorderThickness="1" Margin="27,20,29,309">
+            <TextBlock Text="Квартира" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,0" FontFamily="Agency FB" FontWeight="Bold"/>
+        </Border>
+        <Grid>
+            <Line X1="20"  Margin="7,39,0,0"  Stroke="Black"/>
+            <Line X1="20"  Margin="568,39,-7,0"  Stroke="Black"/>
+            <Line Y1="280"  Margin="7,39,0,0"  Stroke="Black"/>
+            <Line Y1="280"  Margin="588,39,-7,0"  Stroke="Black"/>
+            <Line X1="0" X2="581" Y1="100" Y2="100" Margin="7,219,0,0" Stroke="Black"/>
+        </Grid>
+
+        <Grid Margin="11,57,11,8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="85"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Label Content="Дом"  VerticalAlignment="Center" Margin="0,30,0,29" Width="62"/>
+
+                <ComboBox x:Name="houseComboBox"  Width="410" Margin="0,5" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding House.region}"/>
+
+                                <TextBlock Text="{Binding House.city}"/>
+
+                                <TextBlock Text="{Binding House.street}"/>
+
+                                <TextBlock Text="{Binding House.house1}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <Label Content="Квартира" VerticalAlignment="Center" />
+                <ComboBox x:Name="apartmentComboBox" SelectedItem="{Binding Apartment}" Width="149" Margin="0,5" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding flat}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+
+            <StackPanel Orientation="Horizontal" Grid.Row="3"  VerticalAlignment="Center" >
+                <Button Width="100" Margin="350,0,0,0" Content="Добавить" x:Name="addCounterButton" />
+                <Button Width="100" Margin="5,0,0,0" Content="Назад" x:Name="backButton" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal">
+                <Label Content="Счетчик" VerticalAlignment="Center" Margin="0,10,0,9" Width="62"/>
+                <ComboBox x:Name="counterComboBox" SelectedItem="{Binding HouseService}" Margin="0,5" Width="146">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Service.name_service}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,120 @@
+﻿<mah:MetroWindow x:Class="Municipal_v2._0.AddWIndowFolder.AddHousePublic"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:Municipal_v2._0.AddWIndowFolder"
+        mc:Ignorable="d"
+        Title="Добавление показаний ОДПУ" Height="433" Width="555.5">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1"/>
+            <RowDefinition Height="389"/>
+            <RowDefinition Height="11"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="11"/>
+            <ColumnDefinition Width="527"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Border Background="#FF767676" Grid.Column="0" Margin="38,-70,38,265" Height="35" BorderBrush="Black" BorderThickness="1">
+                <TextBlock Text="Расчет показаний общедомовых счетчиков" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,0" FontFamily="Agency FB" FontWeight="Bold"/>
+            </Border>
+
+            <Grid>
+                <Line X1="35"  Margin="489,28,0,0"  Stroke="Black"/>
+                <Line X1="35"  Margin="3,28,0,0"  Stroke="Black"/>
+                <Line X1="0" X2="0"  Y1="354" Margin="524,28,0,0"  Stroke="Black"/>
+                <Line X1="0" X2="0"  Y1="354" Margin="3,28,0,0"  Stroke="Black"/>
+                <Line X1="0" X2="521" Y1="100" Y2="100" Margin="3,282,0,0" Stroke="Black"/>
+            </Grid>
+
+            <Grid Margin="10,76,8,20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="88"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="37"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="35"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Margin="0,4" Orientation="Horizontal">
+                    <Label Content="Адрес" VerticalAlignment="Center" Margin="0,28,0,27" Width="90"/>
+                    <ComboBox Width="284" x:Name="houseComboBox" SelectedItem="{Binding House}" SelectionChanged="houseComboBox_SelectionChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Label Content="{Binding city}"/>
+                                    <Label Content="{Binding street}"/>
+                                    <Label Content="{Binding house1}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,4">
+                    <Label Content="Услуга" Width="90"/>
+                    <ComboBox x:Name="counterServiceComboBox" Width="200" SelectedItem="{Binding House_counter}" SelectionChanged="counterServiceComboBox_SelectionChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding HouseService.Service.name_service}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <ComboBox Width="200" x:Name="serviceComboBox" SelectedItem="{Binding HouseService}" SelectionChanged="serviceComboBox_SelectionChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Service.name_service}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,4"  x:Name="indicationsStackPanel">
+                    <Label Content="Показания" Width="90"/>
+                    <TextBox Width="81"  HorizontalContentAlignment="Center" VerticalContentAlignment ="Center" x:Name="indicationNow"/>
+                    <Label Content="{Binding Counter.HouseService.Service.unit_of_measure}"/>
+                    <Label Content="Текущие показания счетчика" VerticalAlignment="Center"/>
+                    <StackPanel DataContext="{Binding ElementName=counterServiceComboBox,Path=SelectedValue}" VerticalAlignment="Center">
+                        <TextBox Width="99" HorizontalContentAlignment="Center" Text="{Binding indication}" IsEnabled="False" VerticalAlignment="Center" />
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0,4">
+                    <Label Content="Использовано" VerticalContentAlignment="Center"/>
+                    <TextBox Width="81" Text="{Binding used,UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="usedTextBox"/>
+                    <Button Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Рассчитать"  Width="110" Height="35" Margin="10,1,0,1" x:Name="calculateButton" Click="calculateButton_Click">
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,4">
+                    <Label Content="Дата" Width="90"/>
+                    <DatePicker x:Name="datePicker"/>
+                    
+                    <ComboBox x:Name="serviceComboBox2" SelectedItem="{Binding HouseService}" Visibility="Hidden">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Service.name_service}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="0,4">
+                    <Button Margin="340,0,0,0" Width="80" x:Name="saveButton" Content="Сохранить" Click="saveButton_Click"/>
+                    <Button Margin="5,0,0,0" Width="80" x:Name="backButton"  Content="назад" Click="backButton_Click"/>
+                </StackPanel>
+
+            </Grid>
+        </Grid>
+
+
+    </Grid>
+</mah:MetroWindow>

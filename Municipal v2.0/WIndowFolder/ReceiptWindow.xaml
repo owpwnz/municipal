@@ -1,0 +1,99 @@
+﻿<mah:MetroWindow x:Class="Municipal_v2._0.WIndowFolder.ReceiptWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:Municipal_v2._0.WIndowFolder"
+        mc:Ignorable="d"
+        Title="Квитанции" Height="731.539" Width="1300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="11"/>
+            <ColumnDefinition Width="1265"/>
+            <ColumnDefinition Width="11"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="686"/>
+            <RowDefinition Height="15"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Border Background="#FF767676" HorizontalAlignment="Center" Margin="98,26,98,625" Width="962" Height="35" BorderBrush="Black" BorderThickness="1">
+                <TextBlock Text="Список квитанций" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,0" FontFamily="Agency FB" FontWeight="Bold"/>
+            </Border>
+
+            <Grid>
+                <Line X1="120"  Margin="32,43,0,0"  Stroke="Black"/>
+                <Line X1="120"  Margin="1114,43,0,0"  Stroke="Black"/>
+                <Line Y1="630" Margin="32,43,0,0"  Stroke="Black"/>
+                <Line Y1="630" Margin="1234,43,0,0"  Stroke="Black"/>
+                <Line X1="0" X2="1202" Y1="100" Y2="100" Margin="32,573,0,0" Stroke="Black"/>
+            </Grid>
+
+            <Grid Margin="48,74,50,24">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="0">
+                    <Button x:Name="addReceiptButton" Margin="5,10,0,10" Width="100" Content="Добавить" Click="addReceiptButton_Click" />
+                    <Button  Margin="5,10,0,10" Width="100" Content="Удалить"  x:Name="deleteReceiptButton" Click="deleteReceiptButton_Click"/>
+                    <Button  Margin="5,10,0,10" Width="100" Content="Оплатить"  x:Name="payButton" Click="payButton_Click"/>
+                    <Button  Margin="5,10,0,10" Width="196" Content="Печатная форма квитанции"  x:Name="printButton" Click="printButton_Click"/>
+                </StackPanel>
+
+                <DataGrid Grid.Row="1" x:Name="receiptDataGrid" ItemsSource="{Binding Receipts}" SelectedItem="{Binding selectedRecepit}" AutoGenerateColumns="False" IsReadOnly="true">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="№ квитанции" Binding="{Binding receipt_id}"/>
+                        <DataGridTextColumn Header="Лицевой счет" Binding="{Binding Personal_account.personal_id}"/>
+                        <DataGridTemplateColumn Header="Адрес">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <TextBlock Text="г. "/>
+                                        <TextBlock Text="{Binding Personal_account.Apartment.House.city}"/>
+                                        <TextBlock Text=" ул. "/>
+                                        <TextBlock  Text="{Binding Personal_account.Apartment.House.street}"/>
+                                        <TextBlock Text=" д. "/>
+                                        <TextBlock  Text="{Binding Personal_account.Apartment.House.house1}"/>
+                                        <TextBlock Text=" кв. "/>
+                                        <TextBlock Text="{Binding Personal_account.Apartment.flat}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn Header="Дата" Binding="{Binding date}"/>
+
+                        <DataGridTextColumn Header="Использовано" Binding="{Binding amount,StringFormat='0.00000'}"/>
+                        <DataGridTextColumn Header="Задолженность" Binding="{Binding debt}"/>
+                        <DataGridTextColumn Header="Пени" Binding="{Binding penalties}"/>
+
+                        <DataGridTemplateColumn Header="Сумма к оплате">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <TextBlock Text="  "/>
+                                        <TextBlock Text="{Binding amount_to_pay,StringFormat='0.00'}"/>
+                                        <TextBlock Text=" руб. "/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn Header="Оплатить до" Binding="{Binding date_pay_before}"/>
+                        <DataGridTextColumn Header="Сумма оплаты" Binding="{Binding amount_paid}"/>
+                        <DataGridTextColumn Header="Дата оплаты" Binding="{Binding date_pay}"/>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+</mah:MetroWindow>

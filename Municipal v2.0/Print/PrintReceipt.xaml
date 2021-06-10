@@ -1,0 +1,1029 @@
+﻿<mah:MetroWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    
+        xmlns:local="clr-namespace:Municipal_v2._0.Print"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="Municipal_v2._0.Print.PrintReceipt"
+        mc:Ignorable="d"
+        Title="Печать" Height="31cm" Width="27cm" >
+    <Window.Resources>
+        
+        
+        
+        
+        <Style x:Key="DataGridStyle1" TargetType="{x:Type DataGrid}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGrid}">
+                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="DG_ScrollViewer" Focusable="false">
+                                <ScrollViewer.Template>
+                                    <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                                        <Grid>
+                                            <Button Command="{x:Static DataGrid.SelectAllCommand}" Focusable="false" Style="{DynamicResource {ComponentResourceKey ResourceId=DataGridSelectAllButtonStyle, TypeInTargetAssembly={x:Type DataGrid}}}" Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.All}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" Width="{Binding CellsPanelHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                                            <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter" Grid.Column="1" Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                                            <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" CanContentScroll="{TemplateBinding CanContentScroll}" Grid.ColumnSpan="2" Grid.Row="1"/>
+                                            <ScrollBar x:Name="PART_VerticalScrollBar" Grid.Column="2" Maximum="{TemplateBinding ScrollableHeight}" Orientation="Vertical" Grid.Row="1" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportHeight}"/>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </ScrollViewer.Template>
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </ScrollViewer>
+                        </Border>
+
+                 
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsGrouping" Value="true"/>
+                        <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+        
+        <Style x:Key="ListBoxItemCustomStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource FindAncestor,
+                                                         AncestorLevel=1, AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource FindAncestor,
+                                                         AncestorLevel=1, AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="FocusVisualStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeDashArray="1 2" StrokeThickness="1" />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="Bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}"
+                                ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Bd" Property="Background" Value="#1F26A0DA"/>
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="#A826A0DA" />
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="False" />
+                                    <Condition Property="IsSelected" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="#FFDADADA" />
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="True" />
+                                    <Condition Property="IsSelected" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Bd" Property="Background" Value="#3D26A0DA" />
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="#FF26A0DA" />
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Bd" Property="TextElement.Foreground" Value="Black"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid x:Name="mainGrid">
+        <ScrollViewer x:Name="mainScrollViewer">
+
+            <Grid x:Name="mainGrid2" >
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Margin="5,10,5,0" x:Name="controlPrintStackPanel">
+                    <Label Content="Лицевой счет:" HorizontalAlignment="Center"/>
+                    <ComboBox x:Name="personalComboBox" SelectionChanged="personalComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalAlignment="Center">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding personal_id}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <DatePicker x:Name="datePicker" SelectedDateChanged="datePicker_SelectedDateChanged"/>
+                    <Button x:Name="printButton" Click="printButton_Click"  Content="Печать"/>
+
+
+                    <StackPanel DataContext="{Binding ElementName=amountComboBox,Path=SelectedValue}" Visibility="Hidden">
+                        <TextBlock Text="{Binding date_pay_before}" x:Name="datePayBeforeTextBlock"/>
+                    </StackPanel>
+
+                    <ComboBox x:Name="amountComboBox" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="Hidden">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding amount_to_pay,StringFormat='0.00'}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <StackPanel DataContext="{Binding ElementName=amountComboBox,Path=SelectedValue}" Visibility="Hidden">
+                        <TextBlock Text="{Binding amount_to_pay,StringFormat='0.00'}" x:Name="amountTextBlock"/>
+                    </StackPanel>
+
+
+                    <ComboBox x:Name="ukComboBox" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="Hidden">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding id}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                </StackPanel>
+
+
+                <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1" Width="21cm" Height="29.7cm" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,8,0">
+                    <Grid x:Name="printGrid" Margin="0.5cm" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5cm"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="357"/>
+                            <RowDefinition Height="169"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+
+                        <StackPanel Grid.Column="0" Grid.RowSpan="2">
+                            <Line Y1="525" Margin="187,0,0,0"  Stroke="Black" StrokeThickness="1"/>
+                        </StackPanel>
+
+
+                        <StackPanel Grid.ColumnSpan="2" Grid.Row="1">
+                            <Line X1="753"  Margin="0,168,0,0"  Stroke="Black" StrokeThickness="1"/>
+                        </StackPanel>
+
+
+                        <StackPanel Grid.ColumnSpan="2">
+                            <Line X1="753"  Margin="0,356,0,0"  Stroke="Black" StrokeThickness="1"/>
+                        </StackPanel>
+
+
+                        <Grid Grid.Row="0" Grid.Column="0" x:Name="qrCodeGrid">
+                            <StackPanel Margin="0,0,0,0">
+                                <StackPanel Margin="15,15,0,0">
+                                    <TextBlock Text="ИЗВЕЩЕНИЕ"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock x:Name="monthTextBlock1" FontWeight="Bold"/>
+                                        <TextBlock x:Name="yearTextBlock1" Margin="5,0,0,0" FontWeight="Bold"/>
+                                        <TextBlock Text="г." FontWeight="Bold" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <TextBlock/>
+                            </StackPanel>
+                            <Image x:Name="qrCodeImage" Margin="0,0,8,0"/>
+                        </Grid>
+
+                        <Grid Grid.Row="1" Grid.Column="0" x:Name="monthYearGrid">
+                            <StackPanel Margin="0,0,0,0">
+                                <StackPanel Margin="15,15,0,0">
+                                    <TextBlock Text="КВИТАНЦИЯ"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock x:Name="monthTextBlock2" FontWeight="Bold"/>
+                                        <TextBlock x:Name="yearTextBlock2" Margin="5,0,0,0" FontWeight="Bold"/>
+                                        <TextBlock Text="г." FontWeight="Bold" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <TextBlock/>
+                            </StackPanel>
+                        </Grid>
+
+
+                        <Grid Grid.Row="0" Grid.Column="1" x:Name="paymentGrid">
+                            <StackPanel >
+                                <StackPanel Margin="0,0,0,0" >
+                                    <TextBlock Text="ПЛАТЕЖНЫЙ ДОКУМЕНТ" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="11"/>
+                                    <TextBlock Text="для внесения платы за содержание жилого помещения и предоставление коммунальных услуг" HorizontalAlignment="Center" FontSize="10"/>
+                                    <StackPanel Orientation="Horizontal" Margin="5,0,0,0">
+                                        <TextBlock Text="Раздел 1" FontSize="10"/>
+                                        <TextBlock Text="Информация для внесения платы получателю платежа (получателям платежей)" Margin="15,0,0,0" FontWeight="Bold" FontSize="10"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+
+
+                            <StackPanel Margin="5,46,-1,64" Orientation="Horizontal">
+
+                                <Line X1="560"  Margin="0,0,0,0"  Stroke="Black" x:Name="topLine" StrokeThickness="1"/>
+                                <Line Y1="246" Margin="-560,0,0,0"  Stroke="Black" x:Name="leftLine" StrokeThickness="1"/>
+                                <Line Y1="246" Margin="0,0,0,0"  Stroke="Black" x:Name="rightLine" StrokeThickness="1"/>
+                                <Line X1="560"  Margin="-560,40,0,0"  Stroke="Black" x:Name="middleLine" StrokeThickness="1"/>
+                                <Line X1="560"  Margin="-560,246,0,0"  Stroke="Black" x:Name="bottomLane" StrokeThickness="1"/>
+
+
+                                <Line Y1="246" Margin="-480,0,0,0"  Stroke="Black" StrokeThickness="1"/>
+
+                                <Line Y1="246" Margin="-350,0,0,0"  Stroke="Black" StrokeThickness="1"/>
+
+                                <Line Y1="246" Margin="-270,0,0,0"  Stroke="Black" StrokeThickness="1"/>
+
+                                <Line Y1="246" Margin="-100,0,0,0"  Stroke="Black" StrokeThickness="1"/>
+
+
+                                <Grid Margin="-560,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition Width="130"/>
+                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition Width="170"/>
+                                        <ColumnDefinition Width="100"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+
+                                    <StackPanel Grid.Column="0" >
+                                        <TextBlock Text="Наименование" FontSize="10" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="получателя" HorizontalAlignment="Center" FontSize="10"/>
+                                        <TextBlock Text="платежа" HorizontalAlignment="Center" FontSize="10"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <TextBlock Text="Номер банковского счета" FontSize="10" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="и банковские реквизиты" HorizontalAlignment="Center" FontSize="10"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="2" >
+                                        <TextBlock Text="№ л/счета (иной" FontSize="10" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="идентификатор" HorizontalAlignment="Center" FontSize="10"/>
+                                        <TextBlock Text="плательщика)" HorizontalAlignment="Center" FontSize="10"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="3" VerticalAlignment="Center">
+                                        <TextBlock Text="Виды услуг" HorizontalAlignment="Center" FontSize="11"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="4" VerticalAlignment="Center">
+                                        <TextBlock Text="Сумма" HorizontalAlignment="Center" FontSize="11"/>
+                                        <TextBlock Text="к оплате, руб." HorizontalAlignment="Center" FontSize="11"/>
+
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"  Orientation="Horizontal" DataContext="{Binding SelectedValue, ElementName=personalComboBox}">
+                                        <TextBlock Text="л/с №" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding personal_id}" FontWeight="Bold" x:Name="personalTextBlock"/>
+                                    </StackPanel>
+
+
+                                    <StackPanel Grid.Row="1" Grid.Column="0" DataContext="{Binding ElementName=ukComboBox,Path=SelectedValue}" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                                        <TextBlock Text="{Binding uk_name}" TextWrapping="Wrap" FontSize="9" x:Name="ukNameTextBlock"/>
+                                        <TextBlock Text="ИНН:" TextWrapping="Wrap" FontSize="9"/>
+                                        <TextBlock Text="{Binding INN}" TextWrapping="Wrap" FontSize="9" x:Name="innTextBlock" />
+                                    </StackPanel>
+
+
+                                    <StackPanel Grid.Row="1" Grid.Column="1" DataContext="{Binding ElementName=ukComboBox,Path=SelectedValue}" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="р/c " TextWrapping="Wrap" FontSize="9"/>
+                                            <TextBlock Text="{Binding r_s}" TextWrapping="Wrap" FontSize="9" x:Name="rsTextBlock"/>
+                                            <TextBlock Text=", в " TextWrapping="Wrap" FontSize="9"/>
+                                        </StackPanel>
+                                        <TextBlock Text="{Binding name_bank}" x:Name="nameBankTextBlock" TextWrapping="Wrap" FontSize="9"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="к/c " TextWrapping="Wrap" FontSize="9"/>
+                                            <TextBlock Text="{Binding k_s}" TextWrapping="Wrap" FontSize="9" x:Name="ksTextBlock"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="БИК " TextWrapping="Wrap" FontSize="9"/>
+                                            <TextBlock Text="{Binding BIK}" TextWrapping="Wrap" FontSize="9" x:Name="bikTextBlock"/>
+                                        </StackPanel>
+                                    </StackPanel>
+
+
+                                    <StackPanel Grid.Row="1" Grid.Column="3">
+
+                                        <ListBox FontFamily="Times New Roman" ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="serviceListBox" IsEnabled="False" Height="203" Margin="1" ItemContainerStyle="{StaticResource ListBoxItemCustomStyle}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Service.name_service}" FontSize="10" TextWrapping="Wrap"/>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center"  Orientation="Horizontal" IsEnabled="False">
+                                        <ListBox  x:Name="amountListBox" FontWeight="Bold" ItemContainerStyle="{StaticResource ListBoxItemCustomStyle}">
+                                            <ListBox.ItemTemplate >
+                                                <DataTemplate>
+                                                    <TextBlock x:Name="amountTextBlock" Text="{Binding amount_to_pay,StringFormat='0.00'}"/>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+
+
+
+                            <StackPanel Margin="5,295,0,15" DataContext="{Binding ElementName=personalComboBox, Path=SelectedValue}">
+                                <TextBlock Text="Ф.И.О.(наименование) плательщика собственника/нанимателя"/>
+                                <StackPanel Orientation="Horizontal" >
+                                    <TextBlock Text="{Binding Owner.surname}" FontWeight="Bold" x:Name="firstNameTextBlock"/>
+                                    <TextBlock Text="  "/>
+                                    <TextBlock Text="{Binding Owner.first_name}" FontWeight="Bold"/>
+                                    <TextBlock Text="  "/>
+                                    <TextBlock Text="{Binding Owner.middle_name}" FontWeight="Bold"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Адрес "/>
+                                    <TextBlock Text="{Binding Apartment.House.street}"/>
+                                    <TextBlock Text=" ул, дом № "/>
+                                    <TextBlock Text="{Binding Apartment.House.house1}"/>
+                                    <TextBlock Text=" кв. "/>
+                                    <TextBlock Text="{Binding Apartment.flat}"/>
+                                </StackPanel>
+                            </StackPanel>
+
+                        </Grid>
+
+                        <Grid Grid.Row="1" Grid.Column="1">
+                            <StackPanel  Margin="5,0,0,150" Orientation="Horizontal">
+                                <TextBlock Text="Раздел 2"/>
+                                <TextBlock FontWeight="Bold" Text="Сведения о плательщике и исполнителе услуг" Margin="15,0,0,0"/>
+                            </StackPanel>
+
+                            <StackPanel Margin="5,26,0,6">
+                                <Line X1="559"  Margin="0,0,0,0"  Stroke="Black" StrokeThickness="1"/>
+                                <Line Y1="135" Margin="0,0,0,0"  Stroke="Black" StrokeThickness="1"/>
+                                <Line Y1="135" Margin="558,-135,0,0"  Stroke="Black" StrokeThickness="1"/>
+                                <Line X1="559"  Margin="0,-60,0,0"  Stroke="Black" StrokeThickness="1"/>
+                                <Line X1="559"  Margin="0,0,0,0"  Stroke="Black" StrokeThickness="1"/>
+                            </StackPanel>
+
+                            <Grid Margin="5,27,0,11"   DataContext="{Binding ElementName=personalComboBox, Path=SelectedValue}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="14"/>
+                                    <RowDefinition Height="14"/>
+                                    <RowDefinition Height="14"/>
+                                    <RowDefinition Height="14"/>
+                                    <RowDefinition Height="18"/>
+
+                                    <RowDefinition Height="12"/>
+                                    <RowDefinition Height="14"/>
+                                    <RowDefinition Height="14"/>
+                                    <RowDefinition Height="14"/>
+                                    <RowDefinition Height="14"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Grid.Row="0" Margin="5,0,0,0" Orientation="Horizontal">
+                                    <TextBlock Text="за " FontSize="10"/>
+                                    <TextBlock x:Name="monthTextBlock3" FontWeight="Bold" Margin="5,0,0,0" FontSize="10"/>
+                                    <TextBlock x:Name="yearTextBlock3" FontWeight="Bold" Margin="5,0,0,0" FontSize="10"/>
+                                    <TextBlock Text="г." FontWeight="Bold" Margin="5,0,0,0" FontSize="10"/>
+                                    <TextBlock Margin="100,0,0,0" Text="(расчетный период)" FontSize="10"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="1" Margin="5,0,0,0">
+                                    <TextBlock Text="Ф.И.О. (наименование) плательщика собственника/нанимателя" FontSize="10"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="2" Margin="5,0,0,0">
+                                    <StackPanel Orientation="Horizontal"  >
+                                        <TextBlock Text="{Binding Owner.surname}" FontWeight="Bold" FontSize="10" x:Name="lastNameTextBlock"/>
+                                        <TextBlock Text="  "/>
+                                        <TextBlock Text="{Binding Owner.first_name}" FontWeight="Bold" FontSize="10" x:Name="firstNameTextBlock1"/>
+                                        <TextBlock Text="  "/>
+                                        <TextBlock Text="{Binding Owner.middle_name}" FontWeight="Bold" FontSize="10" x:Name="middleNameTextBlock"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Grid.Row="3" Margin="5,0,0,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Адрес " FontSize="10"/>
+                                        <TextBlock Text="{Binding Apartment.House.street}" FontWeight="Bold" FontSize="10" x:Name="adress1"/>
+                                        <TextBlock Text=" ул, дом № " FontWeight="Bold" FontSize="10" x:Name="adress2"/>
+                                        <TextBlock Text="{Binding Apartment.House.house1}" FontWeight="Bold" FontSize="10" x:Name="adress3"/>
+                                        <TextBlock Text=" кв. " FontWeight="Bold" FontSize="10" x:Name="adress4"/>
+                                        <TextBlock Text="{Binding Apartment.flat}" FontWeight="Bold" FontSize="10" x:Name="adress5"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Grid.Row="4" Margin="5,0,0,0" Orientation="Horizontal" >
+                                    <TextBlock Text="Площадь помещ./здания " FontSize="10"/>
+                                    <TextBlock Text="{Binding Apartment.square}" FontWeight="Bold" Margin="25,0,0,0" FontSize="10"/>
+                                    <TextBlock Text="кв.м." Margin="35,0,0,0" FontSize="10"/>
+                                    <TextBlock Text="Количество прожив./ зарег." Margin="25,0,0,0" FontSize="10"/>
+                                    <TextBlock Text="{Binding Apartment.number_of_residents__number_of_residents__number_of_residents__number_of_residents__number_of_residents_}" FontWeight="Bold" Margin="55,0,0,0" FontSize="10"/>
+                                    <TextBlock Text="чел." Margin="25,0,0,0" FontSize="10"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="5" Margin="5,0,0,0" Orientation="Horizontal" DataContext="{Binding ElementName=ukComboBox,Path=SelectedValue}">
+                                    <TextBlock Text="Наименование организации" FontSize="10"/>
+                                    <TextBlock Text="{Binding uk_name}" Margin="110,0,0,0" FontSize="10"/>
+                                    <TextBlock Text="ИНН:" Margin="100,0,0,0" FontSize="10"/>
+                                    <TextBlock Text="{Binding INN}" Margin="5,0,0,0" FontSize="10" FontWeight="Bold"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="6" Margin="5,0,0,0" Orientation="Horizontal" DataContext="{Binding ElementName=ukComboBox,Path=SelectedValue}">
+                                    <TextBlock Text="Адрес" FontSize="10"/>
+                                    <TextBlock Text="{Binding adress}" FontSize="10" FontWeight="Bold" Margin="5,0,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="7" Margin="5,0,0,0" Orientation="Horizontal" DataContext="{Binding ElementName=ukComboBox,Path=SelectedValue}">
+                                    <TextBlock Text="р/с" FontSize="10"/>
+                                    <TextBlock Text="{Binding r_s}" FontSize="10"  Margin="5,0,0,0"/>
+                                    <TextBlock Text=", в " FontSize="10"/>
+                                    <TextBlock Text="{Binding name_bank}" FontSize="10"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="8" Margin="5,0,0,0" Orientation="Horizontal" DataContext="{Binding ElementName=ukComboBox,Path=SelectedValue}">
+                                    <TextBlock Text="к/с" FontSize="10"/>
+                                    <TextBlock Text="{Binding r_s}" FontSize="10"  Margin="5,0,0,0"/>
+                                    <TextBlock Text=", БИК" FontSize="10"/>
+                                    <TextBlock Text="{Binding BIK}" Margin="3,0,0,0" FontSize="10"/>
+                                </StackPanel>
+
+                            </Grid>
+                        </Grid>
+
+                        <Grid Grid.Row="2" Grid.ColumnSpan="2">
+                            <StackPanel Orientation="Horizontal" >
+                                <TextBlock Text="Раздел 3" FontSize="10"/>
+                                <TextBlock Margin="5,0,0,534" Text="РАСЧЕТ РАЗМЕРА ПЛАТЫ ЗА СОДЕРЖАНИЕ И РЕМОНТ ЖИЛОГО ПОМЕЩЕНИЯ И КОММУНАЛЬНЫЕ УСЛУГИ" FontWeight="Bold" FontSize="10"/>
+                            </StackPanel>
+
+
+
+                            <Line X1="753"  Margin="0,16,0,0"  Stroke="#FF000000" StrokeThickness="2" Fill="#FFCCDAFC" />
+                            <Line X1="753"  Margin="0,55,0,0"  Stroke="Black" StrokeThickness="2"/>
+                            <Line X1="753"  Margin="0,75,0,0"  Stroke="Black" StrokeThickness="2"/>
+                            <Line Y1="77" Margin="0,16,0,0"  Stroke="Black" StrokeThickness="2"/>
+
+                            <Line Y1="38" Margin="192,16,0,500"  Stroke="Black" StrokeThickness="2"/>
+                            <Line Y1="38" Margin="231,16,0,500"  Stroke="Black" StrokeThickness="2"/>
+
+                            <Line Y1="38" Margin="346,16,0,500"  Stroke="Black" StrokeThickness="2"/>
+
+                            <Line Y1="38" Margin="394,16,0,500"  Stroke="Black" StrokeThickness="2"/>
+
+                            <Line Y1="15" Margin="288,40,0,500"  Stroke="Black" StrokeThickness="2"/>
+                            <Line Y1="77" Margin="752,16,0,0"  Stroke="Black" StrokeThickness="2"/>
+
+                            <Line X1="114"  Margin="231,40,0,0"  Stroke="Black" StrokeThickness="2"/>
+                            <Line Y1="15" Margin="452,40,0,500"  Stroke="Black" StrokeThickness="2"/>
+
+                            <Line Y1="38" Margin="511,16,0,500"  Stroke="Black" StrokeThickness="2"/>
+
+                            <Line X1="118"  Margin="394,40,0,0"  Stroke="Black" StrokeThickness="2"/>
+
+                            <Line Y1="38" Margin="554,16,0,500"  Stroke="Black" StrokeThickness="2"/>
+
+                            <Line Y1="38" Margin="597,16,0,500"  Stroke="Black" StrokeThickness="2"/>
+
+                            <Line Y1="38" Margin="640,16,0,500"  Stroke="Black" StrokeThickness="2"/>
+
+                            <Line Y1="38" Margin="688,16,0,500"  Stroke="Black" StrokeThickness="2"/>
+
+
+
+                            <Grid Margin="0,18,0,449">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="33"/>
+                                    <RowDefinition Height="19"/>
+                                    <RowDefinition Height="19"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="192"/>
+                                    <ColumnDefinition Width="38"/>
+                                    <ColumnDefinition Width="114"/>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="116"/>
+                                    <ColumnDefinition Width="42"/>
+                                    <ColumnDefinition Width="44"/>
+                                    <ColumnDefinition Width="43"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="66"/>
+
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Row="0" Grid.Column="0">
+                                    <StackPanel VerticalAlignment="Center">
+                                        <TextBlock Text="Виды услуг" FontSize="9" HorizontalAlignment="Center" FontWeight="Bold"/>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid Grid.Row="0" Grid.Column="1">
+                                    <StackPanel VerticalAlignment="Center">
+                                        <TextBlock Text="Ед.изм" FontSize="9" HorizontalAlignment="Center" FontWeight="Bold" Margin="-5,0,0,0"/>
+                                    </StackPanel>
+                                </Grid>
+
+
+
+                                <Grid Grid.Column="2">
+                                    <StackPanel>
+                                        <TextBlock Text="Обьем ком.услуг" FontSize="10" HorizontalAlignment="Center" Margin="0,5,0,0" FontWeight="Bold"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="индив." FontSize="10" Margin="15,3,0,0" />
+                                            <TextBlock Text="общ." FontSize="10" Margin="30,3,0,0"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid Grid.Column="3">
+                                    <StackPanel Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                        <TextBlock Text="Тариф" FontSize="9" HorizontalAlignment="Center" FontWeight="Bold" Margin="-3,0,0,0" />
+                                    </StackPanel>
+                                </Grid>
+
+
+                                <Grid Grid.Row="0" Grid.Column="4">
+                                    <StackPanel >
+                                        <TextBlock Text="Разм.платы за ком.услуг" FontSize="9" HorizontalAlignment="Center" FontWeight="Bold" Margin="2,5,0,0"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="индив." FontSize="10" Margin="15,3,0,0"/>
+                                            <TextBlock Text="общ." FontSize="10" Margin="30,3,0,0"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+
+
+
+                                <Grid Grid.Column="5">
+                                    <StackPanel  Orientation="Vertical" HorizontalAlignment="Center" >
+                                        <TextBlock Text="Размер" FontSize="9" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,0,0,0"/>
+                                        <TextBlock Text="повыш." FontSize="9" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,0,0,0"/>
+                                        <TextBlock Text="коэф." FontSize="9" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,-2,0,0"/>
+                                    </StackPanel>
+                                </Grid>
+
+
+                                <Grid Grid.Column="6">
+                                    <StackPanel  Orientation="Vertical" HorizontalAlignment="Center" >
+                                        <TextBlock Text="Размер" FontSize="9" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,0,0,0"/>
+                                        <TextBlock Text="превыш" FontSize="9" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,0,0,0"/>
+                                        <TextBlock Text="платы" FontSize="9" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,-2,0,0"/>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid Grid.Column="7">
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" >
+                                        <TextBlock Text="Пере" FontSize="9" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,0,0,0"/>
+                                        <TextBlock Text="расчеты" FontSize="9" HorizontalAlignment="Center" FontWeight="Bold"  Margin="0,0,0,0"/>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid Grid.Column="8">
+                                    <StackPanel  VerticalAlignment="Center">
+                                        <TextBlock Text="Льготы" FontSize="9" HorizontalAlignment="Center" Margin="0,0,0,0" FontWeight="Bold"  />
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid Grid.Column="9">
+                                    <StackPanel Grid.Row="0" Grid.Column="9" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Text="Всего" FontSize="9" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,0,0,0"/>
+                                        <TextBlock Text="начисл." FontSize="9" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,0,0,0"/>
+                                    </StackPanel>
+                                </Grid>
+
+                                <StackPanel Grid.Column="0" Grid.Row="1">
+                                    <TextBlock Text="Переплата на начало расч.периода" FontSize="10" FontWeight="Bold" Margin="5,5,0,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="0" Grid.Row="2">
+                                    <TextBlock Text="КОММУНАЛЬНЫЕ УСЛУГИ" FontSize="10" FontWeight="Bold" Margin="5,6,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2">
+                                    <TextBlock Text="Дата последней оплаты:" HorizontalAlignment="Center" FontWeight="Bold" VerticalAlignment="Center" Margin="-40,8,0,0" FontSize="9"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="8" Grid.Row="1" Grid.ColumnSpan="2" DataContext="{Binding ElementName=amountComboBox,Path=SelectedValue}">
+                                    <TextBlock Margin="1,8,0,0" Text="{Binding last_payment_date,StringFormat='{}{0:dd.MM.yyyy}'}" FontSize="9" FontWeight="Bold" x:Name="amountDatePay"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="9" Grid.Row="1"  DataContext="{Binding ElementName=amountComboBox,Path=SelectedValue}">
+                                    <TextBlock Margin="15,8,0,0" Text="{Binding overpayment,StringFormat='0.00'}" FontSize="9" FontWeight="Bold"/>
+                                </StackPanel>
+
+
+                            </Grid>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <DataGrid Margin="-1,93,0,0" x:Name="nameServiceGrid" AutoGenerateColumns="False" Style="{DynamicResource DataGridStyle1}" Width="754" IsReadOnly="True" HeadersVisibility="None" >
+                                            <DataGrid.RowStyle>
+                                                <Style TargetType="DataGridRow">
+                                                    <Setter Property="IsHitTestVisible" Value="False"/>
+                                                </Style>
+                                            </DataGrid.RowStyle>
+
+                                            <DataGrid.Columns>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel HorizontalAlignment="Right">
+                                                                <TextBlock Text="{Binding HouseService.Service.name_service}" x:Name="serviceGridText" Margin="0,0,0,0" FontSize="10"  TextWrapping="Wrap" Width="189" />
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding HouseService.Service.unit_of_measure}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="35"  VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding used}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="54" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock  Width="55" />
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding HouseService.rate}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="45" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding amount_pay , StringFormat='0.00'}"   Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="55" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding used1}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="55" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding size_high_coef}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="40" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding amount_high_coef, StringFormat='0.00'}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="40" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding recalculation,StringFormat='0.00'}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="40" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding benefit,StringFormat='0.00'}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="47" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding amount,StringFormat='0.00'}"  Margin="0,0,0,0" FontSize="10" Width="70" VerticalAlignment="Center" />
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <DataGrid Margin="-1,-3,0,0" x:Name="nameServiceGrid1" AutoGenerateColumns="False"  Style="{DynamicResource DataGridStyle1}" Width="{Binding ElementName=nameServiceGrid, Path=ActualWidth}"  IsReadOnly="True" HeadersVisibility="None">
+                                            <DataGrid.RowStyle>
+                                            <Style TargetType="DataGridRow">
+                                                <Setter Property="IsHitTestVisible" Value="False"/>
+                                            </Style>
+                                            </DataGrid.RowStyle>
+
+                                            <DataGrid.Columns>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding HouseService.Service.name_service}" Margin="0,0,0,0" TextWrapping="Wrap" FontSize="10"  Width="189" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding HouseService.Service.unit_of_measure}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="35"  VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock  Width="54" />
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock  Width="55" />
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+
+
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding HouseService.rate}"  Margin="0,0,0,0" FontSize="10" Width="45" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding amount_pay,StringFormat='0.00'}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="55" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding used1}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="55" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn>
+
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding used1}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="40" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding used1}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="40" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding used1}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="40" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding benefit,StringFormat='0.00'}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="47" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding amount,StringFormat='0.00'}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="70" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <DataGrid Margin="-1,-3,0,0" x:Name="nameServiceGrid2" AutoGenerateColumns="False"  Style="{DynamicResource DataGridStyle1}" Width="{Binding ElementName=nameServiceGrid, Path=ActualWidth}" IsReadOnly="True" HeadersVisibility="None" >
+                                            <DataGrid.RowStyle>
+                                                <Style TargetType="DataGridRow">
+                                                    <Setter Property="IsHitTestVisible" Value="False"/>
+                                                </Style>
+                                            </DataGrid.RowStyle>
+                                            <DataGrid.Columns>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding HouseService.Service.name_service}" Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="189" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding HouseService.Service.unit_of_measure}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="35"  VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock  Width="54" />
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+
+
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding used}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="55" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding HouseService.rate}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="45" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+
+                                                <DataGridTemplateColumn>
+
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding used1}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="55" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding amount_pay,StringFormat='0.00'}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="55" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding used1}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="40" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding used1}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="40" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding used1}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="40" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding benefit,StringFormat='0.00'}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="47" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding amount,StringFormat='0.00'}"  Margin="0,0,0,0" FontSize="10" TextWrapping="Wrap" Width="70" VerticalAlignment="Center"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </StackPanel>
+
+                                    <Grid>
+                                        <Line X1="753"  Margin="0,16,0,0"  Stroke="#FF000000" StrokeThickness="2" />
+                                        <Line X1="753"  Margin="0,32,0,0"  Stroke="#FF000000" StrokeThickness="2" />
+                                        <Line X1="753"  Margin="0,48,0,0"  Stroke="#FF000000" StrokeThickness="2"  />
+                                        <Line X1="753"  Margin="0,64,0,0"  Stroke="#FF000000" StrokeThickness="2"/>
+                                        <Line Y1="64" Margin="0,0,0,0"  Stroke="Black" StrokeThickness="2"/>
+                                        <Line Y1="64" Margin="752,0,0,0"  Stroke="Black" StrokeThickness="2"/>
+
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="192"/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="65"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="16"/>
+                                                <RowDefinition Height="16"/>
+                                                <RowDefinition Height="16"/>
+                                                <RowDefinition Height="16"/>
+                                            </Grid.RowDefinitions>
+
+                                            <StackPanel Grid.Column="0" Grid.Row="0">
+                                                <TextBlock Text="Итого начислено, руб" FontWeight="Bold" Margin="5,0,0,0" FontSize="11"/>
+                                            </StackPanel>
+
+
+                                            <StackPanel Grid.Column="2" Grid.Row="0"  DataContext="{Binding ElementName=amountComboBox,Path=SelectedValue}">
+                                                <TextBlock FontWeight="Bold" FontSize="11" Text="{Binding amount,StringFormat='0.00'}" Margin="2,0,0,0"/>
+                                            </StackPanel>
+
+                                            <StackPanel Grid.Column="2" Grid.Row="1"  DataContext="{Binding ElementName=amountComboBox,Path=SelectedValue}">
+                                                <TextBlock FontWeight="Bold" FontSize="11" Text="{Binding penalties,StringFormat='0.00'}" Margin="2,0,0,0"/>
+                                            </StackPanel>
+
+                                            <StackPanel Grid.Column="2" Grid.Row="2"  DataContext="{Binding ElementName=amountComboBox,Path=SelectedValue}">
+                                                <TextBlock FontWeight="Bold" FontSize="11" Text="{Binding debt,StringFormat='0.00'}" Margin="2,0,0,0"/>
+                                            </StackPanel>
+
+
+
+                                            <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Text="Начислено пени,руб" FontSize="11" FontWeight="Bold" Margin="0,0,5,0" Width="111">
+                                            </TextBlock>
+
+                                            <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Text="Задолженность,руб" FontSize="11" FontWeight="Bold" Margin="0,0,5,0" Width="106">
+                                            </TextBlock>
+
+                                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Итого к оплате, руб." FontWeight="Bold" Margin="5,0,0,0" FontSize="11">
+                                            </TextBlock>
+
+
+
+                                            <StackPanel Grid.Column="2" Grid.Row="3" DataContext="{Binding ElementName=amountComboBox,Path=SelectedValue}">
+                                                <TextBlock FontWeight="Bold" FontSize="11" Text="{Binding amount_to_pay,StringFormat='0.00'}" Margin="2,0,0,0"/>
+                                            </StackPanel>
+
+                                      
+
+
+
+
+                                        </Grid>
+                                    </Grid>
+
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+
+                    </Grid>
+                </Border>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+
+
+</mah:MetroWindow>

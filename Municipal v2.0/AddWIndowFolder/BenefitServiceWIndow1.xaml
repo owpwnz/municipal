@@ -1,0 +1,52 @@
+﻿<mah:MetroWindow x:Class="Municipal_v2._0.AddWIndowFolder.BenefitServiceWIndow1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:Municipal_v2._0.AddWIndowFolder"
+        mc:Ignorable="d"
+        Title="Льготы" Height="388.667" Width="503.477">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="490"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="400"/>
+        </Grid.RowDefinitions>
+
+        <Grid  Grid.Column="1">
+            <Border  Margin="66,10,66,355" Height="35" Background="#FF767676"  BorderThickness="1">
+                <TextBlock Foreground="White"  Text="Услуги льгот" HorizontalAlignment="Center" Margin="0,10,0,0" FontFamily="Agency FB" FontWeight="Bold"/>
+            </Border>
+            <Grid>
+                <Line X1="60"  Margin="7,28,0,0"  Stroke="Black"/>
+                <Line X1="60"  Margin="423,28,0,0"  Stroke="Black"/>
+                <Line X1="0" X2="0"  Y1="322" Margin="7,28,0,0"  Stroke="Black"/>
+                <Line X1="0" X2="0"  Y1="322" Margin="483,28,0,0"  Stroke="Black"/>
+                <Line X1="0" X2="476"  Margin="7,350,0,0" Stroke="Black"/>
+            </Grid>
+
+            <Grid Margin="9,58,12,56">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+
+                <Button Margin="5,4,202,5" HorizontalAlignment="Left" Width="100" Height="26" Content="Добавить" x:Name="changeCounteButton" Click="changeCounteButton_Click"/>
+
+                <Button Margin="110,4,202,5" HorizontalAlignment="Left" Width="100" Height="26" Content="Удалить" x:Name="removeCounterButton" Click="removeCounterButton_Click"/>
+
+                <DataGrid IsReadOnly="True" Grid.Row="1" AutoGenerateColumns="False" x:Name="benefitServiceDataGrid" SelectedItem="{Binding selectedBenefitService}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Льгота" Binding="{Binding Benefit.name}"/>
+                        <DataGridTextColumn Header="Услуга" Binding="{Binding Service.name_service}" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</mah:MetroWindow>
